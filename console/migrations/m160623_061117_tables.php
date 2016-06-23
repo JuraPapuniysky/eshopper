@@ -31,9 +31,9 @@ class m160623_061117_tables extends Migration
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
         ], $tableOptions);
 
-        $this->createIndex('FK_brands_category', '{{%brands}}', 'category_id');
+        $this->createIndex('FK_brand_category', '{{%brand}}', 'category_id');
         $this->addForeignKey(
-            'FK_brands_category', '{{%brands}}', 'category_id', '{{%category}}', 'id', 'SET NULL', 'CASCADE'
+            'FK_brand_category', '{{%brand}}', 'category_id', '{{%category}}', 'id'
         );
 
         $this->createTable('{{%product}}',[
@@ -41,19 +41,19 @@ class m160623_061117_tables extends Migration
             'name' => Schema::TYPE_STRING. ' NOT NULL',
             'category_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'brand_id' => Schema::TYPE_INTEGER. ' NOT NULL',
-            'price' => Schema::TYPE_MONEY, ' NOT NULL',
+            'price' => Schema::TYPE_MONEY. ' NOT NULL',
             'description' => Schema::TYPE_TEXT,
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
         ],$tableOptions);
 
         $this->createIndex('FK_product_category', '{{%product}}', 'category_id');
         $this->addForeignKey(
-            'FK_product_category', '{{%product}}', 'category_id', '{{%category}}', 'id', 'SET NULL', 'CASCADE'
+            'FK_product_category', '{{%product}}', 'category_id', '{{%category}}', 'id'
         );
 
         $this->createIndex('FK_product_brand', '{{%product}}', 'brand_id');
         $this->addForeignKey(
-            'FK_product_brand', '{{%product}}', 'brand_id', '{{%brand}}', 'id', 'SET NULL', 'CASCADE'
+            'FK_product_brand', '{{%product}}', 'brand_id', '{{%brand}}', 'id'
         );
 
         $this->createTable('{{%image}}',[
@@ -67,7 +67,7 @@ class m160623_061117_tables extends Migration
 
         $this->createIndex('FK_image_product', '{{%image}}', 'product_id');
         $this->addForeignKey(
-            'FK_image_product', '{{%image}}', 'product_id', '{{%product}}', 'id', 'SET NULL', 'CASCADE'
+            'FK_image_product', '{{%image}}', 'product_id', '{{%product}}', 'id'
         );
 
         $this->createTable('{{%product_availabilyty}}',[
@@ -80,7 +80,7 @@ class m160623_061117_tables extends Migration
 
         $this->createIndex('FK_product_availabilyty_product', '{{%product_availabilyty}}', 'product_id');
         $this->addForeignKey(
-            'FK_product_availabilyty_product', '{{%product_availabilyty}}', 'product_id', '{{%product}}', 'id', 'SET NULL', 'CASCADE'
+            'FK_product_availabilyty_product', '{{%product_availabilyty}}', 'product_id', '{{%product}}', 'id'
         );
     }
 
