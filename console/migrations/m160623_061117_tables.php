@@ -86,9 +86,11 @@ class m160623_061117_tables extends Migration
 
     public function down()
     {
-        echo "m160623_061117_tables cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('{{%category}}');
+        $this->dropTable('{{%brand}}');
+        $this->dropTable('{{%product}}');
+        $this->dropTable('{{%image}}');
+        $this->dropTable('{{%product_availabilyty}}');
     }
 
     /*
