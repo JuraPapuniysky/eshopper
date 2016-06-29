@@ -8,6 +8,6 @@ class Brands extends Widget
 {
     public function run()
     {
-        $this->render('views/brands');
+       return $this->render('/widgets/brands');
     }
 }

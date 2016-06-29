@@ -143,19 +143,17 @@ AppAsset::register($this);
 </header><!--/header-->
 
 
-
-
-
-
 <div class="wrap">
 
 <section>
     <div class="container">
+        <div class="row">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
+        </div>
     </div>
 </section>
 </div>

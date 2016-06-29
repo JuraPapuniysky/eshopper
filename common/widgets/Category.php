@@ -8,6 +8,6 @@ class Category extends Widget
 {
     public function run()
     {
-        $this->render('/widgets/category');
+        return $this->render('/widgets/category');
     }
 }

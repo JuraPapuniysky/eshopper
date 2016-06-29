@@ -1,11 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wsst17
- * Date: 24.06.16
- * Time: 13:27
- */
+
 ?>
+
 <h2>Category</h2>
 <div class="panel-group category-products" id="accordian"><!--category-productsr-->
     <div class="panel panel-default">
