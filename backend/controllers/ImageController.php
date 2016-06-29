@@ -2,19 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\Category;
-use backend\models\Gender;
 use Yii;
-use backend\models\Brand;
-use backend\models\BrandSearch;
+use backend\models\Image;
+use backend\models\ImageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BrandController implements the CRUD actions for Brand model.
+ * ImageController implements the CRUD actions for Image model.
  */
-class BrandController extends Controller
+class ImageController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class BrandController extends Controller
     }
 
     /**
-     * Lists all Brand models.
+     * Lists all Image models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BrandSearch();
+        $searchModel = new ImageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +45,7 @@ class BrandController extends Controller
     }
 
     /**
-     * Displays a single Brand model.
+     * Displays a single Image model.
      * @param integer $id
      * @return mixed
      */
@@ -59,27 +57,25 @@ class BrandController extends Controller
     }
 
     /**
-     * Creates a new Brand model.
+     * Creates a new Image model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Brand();
+        $model = new Image();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'category' => Category::find()->all(),
-                'gender' => Gender::find()->all(),
             ]);
         }
     }
 
     /**
-     * Updates an existing Brand model.
+     * Updates an existing Image model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -93,14 +89,12 @@ class BrandController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'category' => Category::find()->all(),
-                'gender' => Gender::find()->all(),
             ]);
         }
     }
 
     /**
-     * Deletes an existing Brand model.
+     * Deletes an existing Image model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -113,15 +107,15 @@ class BrandController extends Controller
     }
 
     /**
-     * Finds the Brand model based on its primary key value.
+     * Finds the Image model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Brand the loaded model
+     * @return Image the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Brand::findOne($id)) !== null) {
+        if (($model = Image::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

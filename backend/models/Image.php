@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "image".
@@ -17,6 +18,7 @@ use Yii;
  */
 class Image extends \yii\db\ActiveRecord
 {
+    public $imageFile;
     /**
      * @inheritdoc
      */
@@ -31,6 +33,7 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['description', 'product_id', 'src'], 'required'],
             [['product_id'], 'integer'],
             [['time_stamp'], 'safe'],
@@ -49,7 +52,9 @@ class Image extends \yii\db\ActiveRecord
             'description' => 'Description',
             'product_id' => 'Product ID',
             'src' => 'Src',
+            'imageFile' => 'Image',
             'time_stamp' => 'Time Stamp',
+
         ];
     }
 
@@ -59,5 +64,21 @@ class Image extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    public function getProductName()
+    {
+        //TODO
+    }
+
+    public function upload()
+    {
+        if($this->validate())
+        {
+            $this->imageFile->saveAs('images/products'.$this->imageFile->baseName.'.'.$this->imageFile->extention);
+            return true;
+        }else{
+            return false;
+        }
     }
 }
