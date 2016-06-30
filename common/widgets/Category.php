@@ -25,7 +25,7 @@ class Category extends Widget
 
     public function run()
     {
-        return $this->render('/widgets/category',[
+        return $this->render('category',[
             'data' => $this->getWidgetData(),
             ]);
     }

@@ -8,6 +8,6 @@ class Slider extends Widget
 {
     public function run()
     {
-       return $this->render('/widgets/slider');
+       return $this->render('slider');
     }
 }
