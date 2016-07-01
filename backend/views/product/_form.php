@@ -31,4 +31,11 @@ use yii\helpers\ArrayHelper;
 
     <?php ActiveForm::end(); ?>
 
+    <?php
+    if (!$model->isNewRecord) {
+        echo Html::a('Add images',['image/create/', 'product_id' => $model->id], ['class' => 'btn btn-primary', 'href' => '']);
+    }
+
+    ?>
+
 </div>

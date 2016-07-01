@@ -19,6 +19,7 @@ use yii\web\UploadedFile;
 class Image extends \yii\db\ActiveRecord
 {
     public $imageFile;
+    const PATH_TO_FRONTEND = '../../frontend/web';
     /**
      * @inheritdoc
      */
@@ -33,7 +34,7 @@ class Image extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            //[['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['description', 'product_id', 'src'], 'required'],
             [['product_id'], 'integer'],
             [['time_stamp'], 'safe'],
@@ -52,7 +53,7 @@ class Image extends \yii\db\ActiveRecord
             'description' => 'Description',
             'product_id' => 'Product ID',
             'src' => 'Src',
-            'imageFile' => 'Image',
+            'imageFiles' => 'Images',
             'time_stamp' => 'Time Stamp',
 
         ];
@@ -73,11 +74,13 @@ class Image extends \yii\db\ActiveRecord
 
     public function upload()
     {
-        if($this->validate())
-        {
-            $this->imageFile->saveAs('images/products'.$this->imageFile->baseName.'.'.$this->imageFile->extention);
+
+        if ($this->validate()) {
+            $this->src = '/images/products/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
+            $path = self::PATH_TO_FRONTEND.$this->src;
+            $this->imageFile->saveAs($path);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
