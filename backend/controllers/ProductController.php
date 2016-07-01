@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\Brand;
+use backend\models\Image;
 use Yii;
 use backend\models\Product;
 use backend\models\ProductSearch;
@@ -56,6 +57,7 @@ class ProductController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'images' => Image::find()->where(['product_id' => $id])->all(),
         ]);
     }
 
