@@ -10,7 +10,7 @@ $this->title = 'Home';
 ?>
 <div class="col-sm-3">
     <div class="left-sidebar">
-        <?= Slider::widget() ?>
+        
         <?= Category::widget() ?>
         <?= Brands::widget() ?>
 

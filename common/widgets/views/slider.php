@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: wsst17
- * Date: 24.06.16
- * Time: 13:09
- */
-?>
 <section id="slider"><!--slider-->
     <div class="container">
         <div class="row">
@@ -18,7 +10,6 @@
                     </ol>
 
                     <div class="carousel-inner">
-                        
                         <div class="item active">
                             <div class="col-sm-6">
                                 <h1><span>E</span>-SHOPPER</h1>

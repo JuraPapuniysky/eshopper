@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use common\widgets\Slider;
 
 AppAsset::register($this);
 ?>
@@ -142,6 +143,7 @@ AppAsset::register($this);
     </div><!--/header-bottom-->
 </header><!--/header-->
 
+<?= Slider::widget() ?>
 
 <div class="wrap">
 
