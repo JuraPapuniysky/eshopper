@@ -143,7 +143,7 @@ AppAsset::register($this);
     </div><!--/header-bottom-->
 </header><!--/header-->
 
-<?= Slider::widget() ?>
+
 
 <div class="wrap">
 
