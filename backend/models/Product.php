@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "product".
@@ -93,5 +94,15 @@ class Product extends \yii\db\ActiveRecord
     public function getProductAvailabilyties()
     {
         return $this->hasMany(ProductAvailabilyty::className(), ['product_id' => 'id']);
+    }
+
+    public function getProductsImages()
+    {
+        return (new Query())
+            ->select(['product.id', 'product.name', 'product.price', 'image.src'])
+            ->from('product')
+            ->innerJoin('image', 'product.id = image.product.id')
+            ->where(['image.description' => 0])
+            ->all();
     }
 }
