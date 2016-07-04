@@ -96,12 +96,12 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductAvailabilyty::className(), ['product_id' => 'id']);
     }
 
-    public function getProductsImages()
+    public static function getProductsImages()
     {
         return (new Query())
             ->select(['product.id', 'product.name', 'product.price', 'image.src'])
             ->from('product')
-            ->innerJoin('image', 'product.id = image.product.id')
+            ->innerJoin('image', 'product.id = image.product_id')
             ->where(['image.description' => 0])
             ->all();
     }
