@@ -21,5 +21,5 @@ $this->title = 'Home';
 
 </div>
 <div class="col-sm-9 ">
-    <?= FeaturesItems::widget() ?>
+    <?= FeaturesItems::widget(['products' => \backend\models\Product::getProductsImages()]) ?>
 </div>

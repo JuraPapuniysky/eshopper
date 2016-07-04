@@ -21,6 +21,7 @@
         <div id="<?= str_replace(' ', '_', $category['name'])?>" class="panel-collapse collapse">
             <div class="panel-body">
                 <ul>
+                    <li><a href="#">All products of category</a></li>
                     <?php foreach($brands as $brand){ ?>
                     <li><a href="#"><?= $brand['name'] ?></a></li>
                     <?php } ?>

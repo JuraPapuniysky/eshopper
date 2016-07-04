@@ -70,9 +70,13 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($category = null, $brand = null)
     {
-        return $this->render('index');
+        if($category == null && $brand == null)
+        {
+            return $this->render('index');
+        }
+
     }
 
     /**

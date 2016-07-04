@@ -14,7 +14,7 @@ class FeaturesItems extends Widget
    
     public function run()
     {
-        $this->products = Product::getProductsImages();
+        
         return $this->render('features_items',[
             'products' => $this->products,
             
