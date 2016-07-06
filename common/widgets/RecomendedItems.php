@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: wsst17
- * Date: 04.07.16
- * Time: 10:49
+ * Date: 06.07.16
+ * Time: 15:36
  */
 
 namespace common\widgets;
@@ -11,13 +11,11 @@ namespace common\widgets;
 
 use yii\bootstrap\Widget;
 
-class CategoryTab extends Widget
+class RecomendedItems extends Widget
 {
-
-    public $product;
 
     public function run()
     {
-        return $this->render('tab_category');
+        return $this->render('recomended_items');
     }
 }

@@ -6,6 +6,8 @@ use common\widgets\Category;
 use common\widgets\Slider;
 use common\widgets\Brands;
 use common\widgets\FeaturesItems;
+use common\widgets\CategoryTab;
+use common\widgets\RecomendedItems;
 
 $this->title = 'Home';
 ?>
@@ -22,4 +24,6 @@ $this->title = 'Home';
 </div>
 <div class="col-sm-9 ">
     <?= FeaturesItems::widget(['products' => \backend\models\Product::getProductsImages()]) ?>
+    <?= CategoryTab::widget() ?>
+    <?= RecomendedItems::widget() ?>
 </div>
