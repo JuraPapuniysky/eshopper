@@ -20,7 +20,7 @@ class m160705_114126_cart extends Migration
             'email' => Schema::TYPE_STRING. ' NOT NULL',
             'phone' => Schema::TYPE_STRING. ' NOT NULL',
             'addres' => Schema::TYPE_STRING. ' NOT NULL',
-            'status' => Schema::TYPE_SMALLINT. ' NOT NULL',
+            'status' => Schema::TYPE_SMALLINT. ' NOT NULL DEFAULT = 1',
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
         ], $tableOptions);
 
@@ -29,7 +29,19 @@ class m160705_114126_cart extends Migration
             'order_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'count' => Schema::TYPE_INTEGER. ' NOT NULL',
         ], $tableOptions);
+
+        $this->createIndex('FK_orderproduct_product', '{{%order_product}}', 'product_id');
+        $this->addForeignKey(
+            'FK_orderproduct_product', '{{%order_product}}', 'product_id', '{{%product}}', 'id'
+        );
+
+        $this->createIndex('FK_orderproduct_order', '{{%order_product}}', 'order_id');
+        $this->addForeignKey(
+            'FK_orderproduct_order', '{{%order_product}}', 'order_id', '{{%order}}', 'id'
+        );
     }
+
+
 
     public function down()
     {

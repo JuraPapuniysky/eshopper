@@ -10,18 +10,16 @@ namespace common\components;
 
 
 use yii\base\Component;
+use Yii;
 
 class Cart extends Component
 {
-    public function add($productId, $count)
+    public function add($productId, $size)
     {
-        $link = OrderProduct::findOne(['product_id' => $productId, 'order_id' => $this->order->id]);
-        if (!$link) {
-            $link = new OrderProduct();
+        $session = Yii::$app->session;
+        if(!$session->isActive)
+        {
+            $session->open();
         }
-        $link->product_id = $productId;
-        $link->order_id = $this->order->id;
-        $link->count += $count;
-        return $link->save();
     }
 }
