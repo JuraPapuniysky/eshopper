@@ -9,7 +9,7 @@ return [
     'components' => [
         'cart' =>[
             'class' => 'common\components\Cart',
-            'session' => Yii::$app->session,
+            
         ],
     ],
 ];

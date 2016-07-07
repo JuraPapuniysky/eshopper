@@ -14,8 +14,15 @@ class Cart extends Component
 
     public $products;
 
+
+    /**
+     * Add product to cart
+     * @param $productId
+     * @param $size
+     */
     public function add($productId, $size)
     {
+       $this->setSession();
         if(!$this->session->isActive)
         {
             $this->session->open();
@@ -37,8 +44,13 @@ class Cart extends Component
         }
     }
 
+    /**
+     * Remove product from cart
+     * @param $productId
+     */
     public function remove($productId)
     {
+        $this->setSession();
         if(!$this->session->isActive)
         {
             $this->session->open();
@@ -52,6 +64,11 @@ class Cart extends Component
             unset($this->products[$productId]);
             $this->session->set('products', $this->products);
         }
+    }
+
+    public function setSession()
+    {
+        $this->session = Yii::$app->session;
     }
 
 

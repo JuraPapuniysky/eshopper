@@ -78,6 +78,11 @@ class SiteController extends Controller
         }
 
     }
+    
+    public function actionCart()
+    {
+        return $this->render('cart');
+    }
 
     /**
      * Logs in a user.

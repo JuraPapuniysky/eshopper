@@ -23,7 +23,8 @@ $this->title = 'Home';
 
 </div>
 <div class="col-sm-9 ">
-    <?= CategoryTab::widget() ?>
+
     <?= FeaturesItems::widget(['products' => \backend\models\Product::getProductsImages()]) ?>
+    <?= CategoryTab::widget() ?>
     <?= RecomendedItems::widget() ?>
 </div>
