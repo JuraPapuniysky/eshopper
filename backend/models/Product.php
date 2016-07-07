@@ -102,7 +102,6 @@ class Product extends \yii\db\ActiveRecord
             ->select(['product.id', 'product.name', 'product.price', 'image.src'])
             ->from('product')
             ->innerJoin('image', 'product.id = image.product_id')
-            ->where(['image.description' => 0])
-            ->all();
+            ->where(['image.description' => 0]);
     }
 }

@@ -1,11 +1,15 @@
 <?php
+use yii\widgets\LinkPager;
+use yii\widgets\Pjax;
 
 ?>
 
     <div class="features_items"><!--features_items-->
         <h2 class="title text-center">Features Items</h2>
 
-        <?php foreach ($products as $product){ ?>
+        <?php
+        Pjax::begin();
+        foreach ($products as $product){ ?>
         <div class="col-sm-4">
             <div class="product-image-wrapper">
                 <div class="single-products">
@@ -31,6 +35,11 @@
                 </div>
             </div>
         </div>
-        <?php } ?>
+        <?php }
+        echo LinkPager::widget([
+            'pagination' => $pages,
+        ]);
+        Pjax::end();
+        ?>
 
     </div><!--features_items-->

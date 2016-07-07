@@ -9,15 +9,31 @@
 namespace common\widgets;
 
 
+use backend\models\Category;
+use backend\models\Product;
 use yii\bootstrap\Widget;
 
 class CategoryTab extends Widget
 {
 
-    public $product;
+    public $data;
+
+   
+    public function setOptions()
+    {
+
+        foreach( Category::find()->all() as $category)
+        {
+            $query = Product::getProductsImages();
+            $this->data[$category['name']] = $query->andWhere(['product.category_id' => $category->id])->all();
+        }
+    }
 
     public function run()
     {
-        return $this->render('tab_category');
+        $this->setOptions();
+        return $this->render('tab_category',[
+            'data' => $this->data,
+        ]);
     }
 }
