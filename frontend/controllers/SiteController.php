@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use backend\models\Image;
+use backend\models\Product;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -82,6 +84,14 @@ class SiteController extends Controller
     public function actionCart()
     {
         return $this->render('cart');
+    }
+
+    public function actionProductDetails($id)
+    {
+        return $this->render('product_details', [
+           'product' => Product::findOne(['id' => $id]),
+           'images' => Image::findAll(['product_id' => $id]),
+        ]);
     }
 
     /**

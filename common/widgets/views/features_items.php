@@ -17,13 +17,13 @@ use yii\widgets\Pjax;
                         <img src="<?= $product['src']?>" alt="" />
                         <h2>$ <?= money_format('%i', $product['price']) ?></h2>
                         <p><?= $product['name'] ?></p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a href="/site/product-details<?= $product['id'] ?>"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Details</a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
                             <h2>$ <?= money_format('%i', $product['price']) ?></h2>
                             <p><?= $product['name'] ?></p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <a href="/site/product-details<?= $product['id'] ?>"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Details</a>
                         </div>
                     </div>
                 </div>
