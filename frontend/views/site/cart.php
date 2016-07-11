@@ -4,10 +4,12 @@
 
 <section id="cart_items">
     <div class="container">
-        <?php
-        $this->title = 'Shopping Cart';
-        $this->params['breadcrumbs']['111'] = $this->title;
-        ?>
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
         <div class="table-responsive cart_info">
             <table class="table table-condensed">
                 <thead>
