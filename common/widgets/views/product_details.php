@@ -1,32 +1,38 @@
 <?php
+/* @var $product \backend\models\Product */
+/* @var $images \backend\models\Image */
+
+use backend\models\Image;
+use backend\models\Brand;
+use yii\imagine\Image as Imagine;
+
+$image = Image::findOne(['product_id' => $product->id, 'description' => '0']);
+$brand = Brand::findOne(['id' => $product->id]);
 
 ?>
-?>
+
 <div class="product-details"><!--product-details-->
     <div class="col-sm-5">
         <div class="view-product">
-            <img src="images/product-details/1.jpg" alt="" />
+            <img src="<?= $image->src ?>" alt="" />
             <h3>ZOOM</h3>
         </div>
         <div id="similar-product" class="carousel slide" data-ride="carousel">
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                    <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                    <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-                </div>
-                <div class="item">
-                    <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                    <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                    <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-                </div>
-                <div class="item">
-                    <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
-                    <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                    <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
-                </div>
+
+                <?php $count = 0; foreach($images as $col){ ?>
+                        <?php if($count == 0){ ?>
+                            <div class="item active">
+                                <?php } else {?>
+                                    <div class="item">
+                                        <?php } ?>
+                            <?php foreach ($col as $item) {  ?>
+                            <a href=""><img src="<?= $item['src'] ?>" alt=""></a>
+                            <?php } ?>
+                        </div>
+                <?php $count++; } ?>
 
             </div>
 
@@ -42,14 +48,14 @@
     </div>
     <div class="col-sm-7">
         <div class="product-information"><!--/product-information-->
-            <img src="images/product-details/new.jpg" class="newarrival" alt="" />
-            <h2>Anne Klein Sleeveless Colorblock Scuba</h2>
+            <img src="/images/product-details/new.jpg" class="newarrival" alt="" />
+            <h2><?= $product['name'] ?></h2>
             <p>Web ID: 1089772</p>
-            <img src="images/product-details/rating.png" alt="" />
+            <img src="/images/product-details/rating.png" alt="" />
 								<span>
-									<span>US $59</span>
+									<span><?= $product['price'] ?></span>
 									<label>Quantity:</label>
-									<input type="text" value="3" />
+									<input type="text" value="1" />
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
@@ -57,8 +63,11 @@
 								</span>
             <p><b>Availability:</b> In Stock</p>
             <p><b>Condition:</b> New</p>
-            <p><b>Brand:</b> E-SHOPPER</p>
-            <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+            <p><b>Brand:</b> <?= $brand->name ?></p>
+            <a href=""><img src="/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
         </div><!--/product-information-->
     </div>
 </div><!--/product-details-->
+<pre>
+    <?php print_r($images); ?>
+</pre>

@@ -1,8 +1,11 @@
 <?php
 
 /* @var $product backend\models\Product */
+/* @var $images backend\models\Image */
 
 use common\widgets\ProductDetails;
+use common\widgets\Category;
+use common\widgets\Brands;
 ?>
 
 <div class="col-sm-3">
@@ -13,5 +16,6 @@ use common\widgets\ProductDetails;
 
 </div>
 <div class="col-sm-9 ">
-    <?= ProductDetails::widget(['product' => $product]) ?>
+    <?= ProductDetails::widget(['product' => $product, 'images' => $images]) ?>
 </div>
+

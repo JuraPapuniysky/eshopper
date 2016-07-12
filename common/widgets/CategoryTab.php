@@ -19,7 +19,7 @@ class CategoryTab extends Widget
     public $data;
 
    
-    public function setOptions()
+    public function setData()
     {
 
         foreach( Category::find()->all() as $category)
@@ -31,7 +31,7 @@ class CategoryTab extends Widget
 
     public function run()
     {
-        $this->setOptions();
+        $this->setData();
         return $this->render('tab_category',[
             'data' => $this->data,
         ]);

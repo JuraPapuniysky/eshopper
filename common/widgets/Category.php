@@ -7,7 +7,7 @@ use yii\bootstrap\Widget;
 
 class Category extends Widget
 {
-
+                    
     public function getWidgetData()
     {
         $dataWidget = [];

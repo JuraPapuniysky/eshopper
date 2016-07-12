@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use yii\imagine\Image as Imagine;
 
 /**
  * This is the model class for table "image".
@@ -79,9 +80,24 @@ class Image extends \yii\db\ActiveRecord
             $this->src = '/images/products/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
             $path = self::PATH_TO_FRONTEND.$this->src;
             $this->imageFile->saveAs($path);
+            $this->saveThumbnail($path, 84, 84);
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function saveThumbnail($path, $width, $height)
+    {
+        $thumbnail = new Image();
+        $thumbnail->src = '/images/products/thumbnails/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
+        $thumbnail->description = 2;
+        $thumbnail->product_id = $this->product_id;
+        $thumbnail->imageFile = null;
+        if($thumbnail->save()) {
+            Imagine::thumbnail($path, $width, $height)->save(self::PATH_TO_FRONTEND . $thumbnail->src);
+        }else{
+            throw new \HttpException;
         }
     }
 }

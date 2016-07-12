@@ -88,9 +88,11 @@ class SiteController extends Controller
 
     public function actionProductDetails($id)
     {
+        $product = Product::findOne(['id' => $id]);
+        
         return $this->render('product_details', [
-           'product' => Product::findOne(['id' => $id]),
-           'images' => Image::findAll(['product_id' => $id]),
+           'product' => $product,
+           'images' => array_chunk(Image::findAll(['product_id' => $id]), 3),
         ]);
     }
 

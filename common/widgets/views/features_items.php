@@ -1,6 +1,7 @@
 <?php
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
+use yii\helpers\Html;
 
 ?>
 
@@ -17,13 +18,21 @@ use yii\widgets\Pjax;
                         <img src="<?= $product['src']?>" alt="" />
                         <h2>$ <?= money_format('%i', $product['price']) ?></h2>
                         <p><?= $product['name'] ?></p>
-                        <a href="/site/product-details<?= $product['id'] ?>"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Details</a>
+                        <?= Html::a(
+                        '<i class="fa fa-shopping-cart"></i>Product Details',
+                        ['/site/product-details/', 'id' => $product['id'] ],
+                        ['class' => 'btn btn-default add-to-cart', 'id' => 'muted_user']
+                        );?>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
                             <h2>$ <?= money_format('%i', $product['price']) ?></h2>
                             <p><?= $product['name'] ?></p>
-                            <a href="/site/product-details<?= $product['id'] ?>"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Product Details</a>
+                            <?= Html::a(
+                                '<i class="fa fa-shopping-cart"></i>Product Details',
+                                ['/site/product-details/', 'id' => $product['id'] ],
+                                ['class' => 'btn btn-default add-to-cart', 'id' => 'muted_user']
+                            );?>
                         </div>
                     </div>
                 </div>
