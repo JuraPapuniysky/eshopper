@@ -1,13 +1,10 @@
 <?php
 /* @var $product \backend\models\Product */
 /* @var $images \backend\models\Image */
+/* @var $image \backend\models\Image */
+/* @var $brand \backend\models\Brand */
 
-use backend\models\Image;
-use backend\models\Brand;
-use yii\imagine\Image as Imagine;
 
-$image = Image::findOne(['product_id' => $product->id, 'description' => '0']);
-$brand = Brand::findOne(['id' => $product->id]);
 
 ?>
 
@@ -29,7 +26,7 @@ $brand = Brand::findOne(['id' => $product->id]);
                                     <div class="item">
                                         <?php } ?>
                             <?php foreach ($col as $item) {  ?>
-                            <a href=""><img src="<?= $item['src'] ?>" alt=""></a>
+                            <a href="/site/product-details/?id=<?= $product->id?>&imageId=<?= $item['id'] ?>"><img src="<?= str_replace('/images/', '/mini-images/', $item['src']) ?>" alt=""></a>
                             <?php } ?>
                         </div>
                 <?php $count++; } ?>
@@ -68,6 +65,3 @@ $brand = Brand::findOne(['id' => $product->id]);
         </div><!--/product-information-->
     </div>
 </div><!--/product-details-->
-<pre>
-    <?php print_r($images); ?>
-</pre>

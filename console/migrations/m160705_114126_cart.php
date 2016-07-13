@@ -20,14 +20,22 @@ class m160705_114126_cart extends Migration
             'email' => Schema::TYPE_STRING. ' NOT NULL',
             'phone' => Schema::TYPE_STRING. ' NOT NULL',
             'addres' => Schema::TYPE_STRING. ' NOT NULL',
-            'status' => Schema::TYPE_SMALLINT. ' NOT NULL DEFAULT = 1',
+            'status' => Schema::TYPE_SMALLINT. " NOT NULL DEFAULT '1'",
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
         ], $tableOptions);
 
         $this->createTable('{{%order_product}}',[
             'product_id' => Schema::TYPE_INTEGER. ' NOT NULL',
+            'size_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'order_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'count' => Schema::TYPE_INTEGER. ' NOT NULL',
+        ], $tableOptions);
+
+        $this->createTable('{{%size}}', [
+            'id' => Schema::TYPE_PK,
+            'gender_id' => Schema::TYPE_STRING. ' NOT NULL',
+            'size' => Schema::TYPE_STRING. ' NOT NULL',
+            'description' => Schema::TYPE_STRING. ' NOT NULL',
         ], $tableOptions);
 
         $this->createIndex('FK_orderproduct_product', '{{%order_product}}', 'product_id');
@@ -39,6 +47,8 @@ class m160705_114126_cart extends Migration
         $this->addForeignKey(
             'FK_orderproduct_order', '{{%order_product}}', 'order_id', '{{%order}}', 'id'
         );
+
+        
     }
 
 
