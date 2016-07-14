@@ -87,6 +87,14 @@ class Image extends \yii\db\ActiveRecord
         }
     }
 
+
+    public function deleteImage()
+    {
+        unlink(static::PATH_TO_FRONTEND.$this->src);
+        unlink(static::PATH_TO_FRONTEND.str_replace('/images/', '/mini-images/', $this->src));
+        $this->delete();
+    }
+
     public function saveThumbnail($path, $width, $height)
     {
       Imagine::thumbnail($path, $width, $height)->save(str_replace('/images/', '/mini-images/', $path), ['quality' => 50]);

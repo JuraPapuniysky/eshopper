@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Image;
-use backend\models\ImageSearch;
+use backend\models\Size;
+use backend\models\SizeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * ImageController implements the CRUD actions for Image model.
+ * SizeController implements the CRUD actions for Size model.
  */
-class ImageController extends Controller
+class SizeController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class ImageController extends Controller
     }
 
     /**
-     * Lists all Image models.
+     * Lists all Size models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ImageSearch();
+        $searchModel = new SizeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class ImageController extends Controller
     }
 
     /**
-     * Displays a single Image model.
+     * Displays a single Size model.
      * @param integer $id
      * @return mixed
      */
@@ -58,35 +57,27 @@ class ImageController extends Controller
     }
 
     /**
-     * Creates a new Image model.
+     * Creates a new Size model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($product_id)
+    public function actionCreate()
     {
-        $model = new Image();
-        $model->product_id = $product_id;
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
-                $model->imageFile = null;
-                $model->save();
-                return $this->redirect(['view', 'id' => $model->id]);
-            }else{
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
+        $model = new Size();
 
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'gender' => $model->getGender(),
             ]);
         }
     }
 
     /**
-     * Updates an existing Image model.
+     * Updates an existing Size model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -100,34 +91,34 @@ class ImageController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'gender' => $model->getGender(),
             ]);
         }
     }
 
     /**
-     * Deletes an existing Image model.
+     * Deletes an existing Size model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $model->deleteImage();
-        
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Image model based on its primary key value.
+     * Finds the Size model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Image the loaded model
+     * @return Size the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Image::findOne($id)) !== null) {
+        if (($model = Size::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

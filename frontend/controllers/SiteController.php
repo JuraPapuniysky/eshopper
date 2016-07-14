@@ -92,31 +92,27 @@ class SiteController extends Controller
 
     public function actionAddToCart($id)
     {
-
+        //TODO
     }
 
     /**
+     * Opens a product details
      * @param $id
+     * @param null $imageId
      * @return string
      */
     public function actionProductDetails($id, $imageId = null)
     {
-        $product = Product::findOne(['id' => $id]);
-        if(null == $imageId)
-        {
-            $image = Image::findOne(['product_id' => $product->id, 'description' => '0']);
-        }else if(null != $imageId){
-            $image = Image::findOne(['product_id' => $product->id, 'id' => $imageId]);
-        }
-
-        $brand = Brand::findOne(['id' => $product->brand_id]);
+        $product = Product::findProductById($id);
+        $image = $product->getMainImage($imageId);
+        $brand = $product->getBrand();
 
         return $this->render('product_details', [
             'product' => $product,
-            'images' => array_chunk(Image::findAll(['product_id' => $id]), 3),
+            'images' => $product->getImagesGroup(),
             'image' => $image,
             'brand' => $brand,
-           ]);
+        ]);
     }
 
     /**

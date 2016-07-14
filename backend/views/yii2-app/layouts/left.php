@@ -41,6 +41,9 @@
                         'items' => [
                             ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii'],],
                             ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
+                            ['label' => 'Product', 'icon' => 'fa fa-file-code-o', 'url' => ['/product'],],
+                            ['label' => 'Image', 'icon' => 'fa fa-file-code-o', 'url' => ['/image'],],
+                            ['label' => 'Size', 'icon' => 'fa fa-file-code-o', 'url' => ['/size'],],
                             [
                                 'label' => 'Level One',
                                 'icon' => 'fa fa-circle-o',
