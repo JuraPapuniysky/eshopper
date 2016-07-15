@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wsst17
- * Date: 04.07.16
- * Time: 10:49
- */
+
 
 namespace common\widgets;
 
@@ -26,14 +21,21 @@ class CategoryTab extends Widget
         {
             $query = Product::getProductsImages();
             $this->data[$category['name']] = $query->andWhere(['product.category_id' => $category->id])->all();
+            if($this->data != null)
+            {
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 
     public function run()
     {
-        $this->setData();
-        return $this->render('tab_category',[
-            'data' => $this->data,
-        ]);
+        if($this->setData()) {
+            return $this->render('tab_category', [
+                'data' => $this->data,
+            ]);
+        }
     }
 }

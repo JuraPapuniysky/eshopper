@@ -11,6 +11,7 @@ use yii\db\Query;
  * @property integer $id
  * @property string $name
  * @property integer $category_id
+ * @property integer $section_id
  * @property integer $brand_id
  * @property string $price
  * @property string $description
@@ -37,8 +38,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'category_id', 'brand_id', 'price'], 'required'],
-            [['category_id', 'brand_id'], 'integer'],
+            [['name', 'category_id', 'brand_id', 'price', 'section_id'], 'required'],
+            [['category_id', 'brand_id', 'section_id'], 'integer'],
             [['price'], 'number'],
             [['description'], 'string'],
             [['time_stamp'], 'safe'],
@@ -60,6 +61,7 @@ class Product extends \yii\db\ActiveRecord
             'brand_id' => 'Brand ID',
             'price' => 'Price',
             'description' => 'Description',
+            'section_id' => 'Section',
             'time_stamp' => 'Time Stamp',
         ];
     }
@@ -115,6 +117,34 @@ class Product extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return Category::findOne(['id' => $this->category_id]);
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]|static[]
+     */
+    public function getCategories()
+    {
+        if($this->category_id == null) {
+            return Category::find()->all();
+        }else{
+            return Category::findAll(['id' => $this->category_id]);
+        }
+    }
+
+    /**
+     * @return static[]
+     */
+    public function getSections()
+    {
+        return Section::findAll(['category_id' => $this->category_id]);
+    }
+
+    /**
+     * @return static[]
+     */
+    public function getBrands()
+    {
+        return Brand::findAll(['category_id' => $this->category_id, 'section_id' => $this->section_id]);
     }
 
     /**

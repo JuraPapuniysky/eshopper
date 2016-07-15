@@ -148,6 +148,11 @@ class m160623_061117_tables extends Migration
         $this->addForeignKey(
             'FK_product_section', '{{%product}}', 'section_id', '{{%section}}', 'id'
         );
+
+        $this->createIndex('FK_size_product_order', '{{%order_product}}', 'size_id');
+        $this->addForeignKey(
+            'FK_size_product_order', '{{%order_product}}', 'size_id', '{{%size}}', 'id'
+        );
     }
 
     public function down()

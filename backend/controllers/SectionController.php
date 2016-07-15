@@ -2,21 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\Brand;
-use backend\models\Image;
 use Yii;
-use backend\models\Product;
-use backend\models\ProductSearch;
+use backend\models\Section;
+use backend\models\SectionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\Category;
-
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * SectionController implements the CRUD actions for Section model.
  */
-class ProductController extends Controller
+class SectionController extends Controller
 {
     /**
      * @inheritdoc
@@ -34,12 +30,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Lists all Product models.
+     * Lists all Section models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new SectionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +45,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Section model.
      * @param integer $id
      * @return mixed
      */
@@ -57,18 +53,17 @@ class ProductController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'images' => Image::find()->where(['product_id' => $id])->all(),
         ]);
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Section model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new Section();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -80,7 +75,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Section model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,14 +89,12 @@ class ProductController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'category' => Category::find()->all(),
-                'brand' => Brand::find()->all(),
             ]);
         }
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Section model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +107,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Section model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Section the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Section::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
