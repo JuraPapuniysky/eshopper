@@ -30,7 +30,7 @@ use yii\helpers\Html;
                             <p><?= $product['name'] ?></p>
                             <?= Html::a(
                                 '<i class="fa fa-shopping-cart"></i>Product Details',
-                                ['/site/product-details/', 'id' => $product['id'] ],
+                                ['/site/product-details/', 'id' => $product['id']],
                                 ['class' => 'btn btn-default add-to-cart', 'id' => 'muted_user']
                             );?>
                         </div>

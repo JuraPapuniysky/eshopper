@@ -87,17 +87,16 @@ class Image extends \yii\db\ActiveRecord
         }
     }
 
+
+    public function deleteImage()
+    {
+        unlink(static::PATH_TO_FRONTEND.$this->src);
+        unlink(static::PATH_TO_FRONTEND.str_replace('/images/', '/mini-images/', $this->src));
+        $this->delete();
+    }
+
     public function saveThumbnail($path, $width, $height)
     {
-        $thumbnail = new Image();
-        $thumbnail->src = '/images/products/thumbnails/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
-        $thumbnail->description = 2;
-        $thumbnail->product_id = $this->product_id;
-        $thumbnail->imageFile = null;
-        if($thumbnail->save()) {
-            Imagine::thumbnail($path, $width, $height)->save(self::PATH_TO_FRONTEND . $thumbnail->src);
-        }else{
-            throw new \HttpException;
-        }
+      Imagine::thumbnail($path, $width, $height)->save(str_replace('/images/', '/mini-images/', $path), ['quality' => 50]);
     }
 }

@@ -11,6 +11,7 @@ use yii\db\Query;
  * @property integer $id
  * @property string $name
  * @property integer $category_id
+ * @property integer $section_id
  * @property integer $brand_id
  * @property string $price
  * @property string $description
@@ -37,8 +38,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'category_id', 'brand_id', 'price'], 'required'],
-            [['category_id', 'brand_id'], 'integer'],
+            [['name', 'category_id', 'brand_id', 'price', 'section_id'], 'required'],
+            [['category_id', 'brand_id', 'section_id'], 'integer'],
             [['price'], 'number'],
             [['description'], 'string'],
             [['time_stamp'], 'safe'],
@@ -60,6 +61,7 @@ class Product extends \yii\db\ActiveRecord
             'brand_id' => 'Brand ID',
             'price' => 'Price',
             'description' => 'Description',
+            'section_id' => 'Section',
             'time_stamp' => 'Time Stamp',
         ];
     }
@@ -69,7 +71,36 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getImages()
     {
-        return $this->hasMany(Image::className(), ['product_id' => 'id']);
+        return Image::findAll(['product_id' => $this->id]);
+    }
+
+    public function getImagesGroup($size = 3)
+    {
+        return array_chunk($this->getImages(), $size);
+    }
+
+    /**
+     * @param $id
+     * @return null|static
+     */
+    public static function findProductById($id)
+    {
+        return static::findOne(['id' => $id]);
+    }
+
+    /**
+     * @param $imageId
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMainImage($imageId)
+    {
+        if($imageId == null)
+        {
+            return Image::findOne(['product_id' => $this->id, 'description' => 0]);
+        }else{
+            return Image::findOne(['product_id' => $this->id, 'id' => $imageId]);
+        }
+
     }
 
     /**
@@ -77,7 +108,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getBrand()
     {
-        return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
+        return Brand::findOne(['id' => $this->brand_id]);
     }
 
     /**
@@ -85,7 +116,35 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+        return Category::findOne(['id' => $this->category_id]);
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]|static[]
+     */
+    public function getCategories()
+    {
+        if($this->category_id == null) {
+            return Category::find()->all();
+        }else{
+            return Category::findAll(['id' => $this->category_id]);
+        }
+    }
+
+    /**
+     * @return static[]
+     */
+    public function getSections()
+    {
+        return Section::findAll(['category_id' => $this->category_id]);
+    }
+
+    /**
+     * @return static[]
+     */
+    public function getBrands()
+    {
+        return Brand::findAll(['category_id' => $this->category_id, 'section_id' => $this->section_id]);
     }
 
     /**

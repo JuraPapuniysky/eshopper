@@ -112,8 +112,9 @@ class ImageController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model->deleteImage();
+        
         return $this->redirect(['index']);
     }
 

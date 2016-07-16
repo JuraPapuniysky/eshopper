@@ -3,7 +3,6 @@
 namespace common\widgets;
 
 
-
 use yii\bootstrap\Widget;
 use yii\data\Pagination;
 

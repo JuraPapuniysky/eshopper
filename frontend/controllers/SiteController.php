@@ -14,7 +14,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use backend\models\Brand;
 /**
  * Site controller
  */
@@ -80,19 +80,38 @@ class SiteController extends Controller
         }
 
     }
-    
+
+    /**
+     * Opens a user cart
+     * @return string
+     */
     public function actionCart()
     {
         return $this->render('cart');
     }
 
-    public function actionProductDetails($id)
+    public function actionAddToCart($id)
     {
-        $product = Product::findOne(['id' => $id]);
-        
+        //TODO
+    }
+
+    /**
+     * Opens a product details
+     * @param $id
+     * @param null $imageId
+     * @return string
+     */
+    public function actionProductDetails($id, $imageId = null)
+    {
+        $product = Product::findProductById($id);
+        $image = $product->getMainImage($imageId);
+        $brand = $product->getBrand();
+
         return $this->render('product_details', [
-           'product' => $product,
-           'images' => array_chunk(Image::findAll(['product_id' => $id]), 3),
+            'product' => $product,
+            'images' => $product->getImagesGroup(),
+            'image' => $image,
+            'brand' => $brand,
         ]);
     }
 

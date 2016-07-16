@@ -10,14 +10,17 @@ class ProductDetails extends Widget
 {
     public $product;
     public $images;
-    public $size = 3;
+    public $image;
+    public $brand;
 
 
     public function run()
     {
         return $this->render('product_details',[
-           'product' => $this->product,
-           'images' => $this->images,
+            'product' => $this->product,
+            'images' => $this->images,
+            'image' => $this->image,
+            'brand' => $this->brand,
         ]);
     }
 }
