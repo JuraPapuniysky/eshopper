@@ -1,5 +1,7 @@
 <?php
 /* @var $data common/widgets/Category */
+
+use yii\helpers\Html;
 ?>
 
 <h2>Category</h2>
@@ -7,7 +9,7 @@
 
     <?php foreach ($data as $dat){
         $category = $dat['category'];
-        $brands = $dat['brands'];
+        $sections = $dat['sections'];
         ?>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -22,8 +24,8 @@
             <div class="panel-body">
                 <ul>
                     <li><a href="#">All products of category</a></li>
-                    <?php foreach($brands as $brand){ ?>
-                    <li><a href="#"><?= $brand['name'] ?></a></li>
+                    <?php foreach($sections as $section){ ?>
+                    <li><?= Html::a($section['name'], ['section', 'product_section' => $section['id']], []) ?></li>
                     <?php } ?>
                 </ul>
             </div>

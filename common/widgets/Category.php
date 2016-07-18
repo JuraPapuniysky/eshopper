@@ -2,7 +2,8 @@
 
 namespace common\widgets;
 
-use backend\models\Brand;
+
+use backend\models\Section;
 use yii\bootstrap\Widget;
 
 class Category extends Widget
@@ -16,7 +17,7 @@ class Category extends Widget
         {
             $dataWidget[$category['name']] = [
                 'category' => $category,
-                'brands' => Brand::find()->where(['category_id' => $category['id']])->all(),
+                'sections' => Section::findAll(['category_id' => $category['id']]),
             ];
         }
         return $dataWidget;

@@ -134,9 +134,13 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return static[]
      */
-    public function getSections()
+    public function getSections($condition = true)
     {
-        return Section::findAll(['category_id' => $this->category_id]);
+        if($condition) {
+            return Section::findAll(['category_id' => $this->category_id]);
+        }else{
+            return Section::find()->all();
+        }
     }
 
     /**

@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Brand;
 
 /**
- * BrandSearch represents the model behind the search form about `app\models\Brand`.
+ * BrandSearch represents the model behind the search form about `backend\models\Brand`.
  */
 class BrandSearch extends Brand
 {
@@ -18,8 +18,8 @@ class BrandSearch extends Brand
     public function rules()
     {
         return [
-            [['id', 'category_id'], 'integer'],
-            [['name', 'gender', 'description', 'image', 'time_stamp'], 'safe'],
+            [['id', 'category_id', 'section_id', 'gender_id'], 'integer'],
+            [['name', 'description', 'image', 'time_stamp'], 'safe'],
         ];
     }
 
@@ -62,10 +62,11 @@ class BrandSearch extends Brand
             'id' => $this->id,
             'category_id' => $this->category_id,
             'time_stamp' => $this->time_stamp,
+            'section_id' => $this->section_id,
+            'gender_id' => $this->gender_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'gender', $this->gender])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'image', $this->image]);
 

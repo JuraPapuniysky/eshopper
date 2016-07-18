@@ -15,7 +15,7 @@ use yii\helpers\Html;
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="<?= $product['src']?>" alt="" />
+                        <img src="<?= $image[$product['id']['src']]?>" alt="" />
                         <h2>$ <?= money_format('%i', $product['price']) ?></h2>
                         <p><?= $product['name'] ?></p>
                         <?= Html::a(
@@ -45,9 +45,7 @@ use yii\helpers\Html;
             </div>
         </div>
         <?php }
-        echo LinkPager::widget([
-            'pagination' => $pages,
-        ]);
+
         Pjax::end();
         ?>
 

@@ -43,6 +43,7 @@
                             ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug'],],
                             ['label' => 'Category', 'icon' => 'fa fa-file-code-o', 'url' => ['/category'],],
                             ['label' => 'Section', 'icon' => 'fa fa-file-code-o', 'url' => ['/section'],],
+                            ['label' => 'Brand', 'icon' => 'fa fa-file-code-o', 'url' => ['/brand'],],
                             ['label' => 'Product', 'icon' => 'fa fa-file-code-o', 'url' => ['/product'],],
                             ['label' => 'Image', 'icon' => 'fa fa-file-code-o', 'url' => ['/image'],],
                             ['label' => 'Size', 'icon' => 'fa fa-file-code-o', 'url' => ['/size'],],

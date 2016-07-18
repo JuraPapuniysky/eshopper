@@ -5,9 +5,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Brand */
-/* @var $category backend\models\Category */
-/* @var $gender backend\models\Gender */
-
 
 $this->title = 'Create Brand';
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];
@@ -21,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'category' => $category,
         'gender' => $gender,
+        'section' => $section,
     ]) ?>
 
 </div>

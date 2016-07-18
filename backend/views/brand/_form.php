@@ -6,9 +6,7 @@ use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Brand */
-/* @var $category backend\models\Category */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $gender backend\models\Gender */
 ?>
 
 <div class="brand-form">
@@ -19,7 +17,9 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map($category, 'id', 'name')) ?>
 
-    <?= $form->field($model, 'gender')->dropDownList(ArrayHelper::map($gender, 'id', 'name')) ?>
+    <?= $form->field($model, 'section_id')->dropDownList(ArrayHelper::map($section, 'id', 'name')) ?>
+
+    <?= $form->field($model, 'gender_id')->dropDownList(ArrayHelper::map($gender, 'id', 'name')) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 

@@ -10,32 +10,39 @@ use yii\bootstrap\Widget;
 
 class CategoryTab extends Widget
 {
+    public $category_id;
+    public $categories;
+    public $products;
+    public $images;
 
-    public $data;
 
-   
     public function setData()
     {
+        $this->categories = Category::find()->all();
 
-        foreach( Category::find()->all() as $category)
+        if($this->category_id != null) {
+            $this->products = Product::findAll(['category_id' => $this->category_id]);
+        }elseif($this->category_id == null)
         {
-            $query = Product::getProductsImages();
-            $this->data[$category['name']] = $query->andWhere(['product.category_id' => $category->id])->all();
-            if($this->data != null)
-            {
-                return true;
-            }else{
-                return false;
-            }
+            $category = $this->categories[0];
+            $this->products = Product::findAll(['category_id' => $category['id']]);
+        }
+
+        foreach ($this->products as $product)
+        {
+            $this->image[$product->id] = $product->getMainImage();
         }
     }
 
     public function run()
     {
-        if($this->setData()) {
+        $this->setData();
             return $this->render('tab_category', [
-                'data' => $this->data,
+                'categories' => $this->categories,
+                'products' => $this->products,
+                'images' => $this->images,
+                'category_id' => $this->category_id,
             ]);
-        }
+
     }
 }

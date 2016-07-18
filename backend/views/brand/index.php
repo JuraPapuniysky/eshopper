@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\BrandSearch */
+/* @var $searchModel backend\models\BrandSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Brands';
@@ -27,10 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'category_id',
-            'gender',
             'description:ntext',
-            // 'image',
+            'image',
             // 'time_stamp',
+            // 'section_id',
+            // 'gender_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

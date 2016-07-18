@@ -4,8 +4,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Brand */
-/* @var $category backend\models\Category */
-/* @var $gender backend\models\Gender */
 
 $this->title = 'Update Brand: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];
@@ -20,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
         'category' => $category,
         'gender' => $gender,
+        'section' => $section,
     ]) ?>
 
 </div>

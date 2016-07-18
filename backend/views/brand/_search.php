@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\BrandSearch */
+/* @var $model backend\models\BrandSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -21,13 +21,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category_id') ?>
 
-    <?= $form->field($model, 'gender') ?>
-
     <?= $form->field($model, 'description') ?>
 
-    <?php // echo $form->field($model, 'image') ?>
+    <?= $form->field($model, 'image') ?>
 
     <?php // echo $form->field($model, 'time_stamp') ?>
+
+    <?php // echo $form->field($model, 'section_id') ?>
+
+    <?php // echo $form->field($model, 'gender_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

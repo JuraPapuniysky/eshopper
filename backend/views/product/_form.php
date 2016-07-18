@@ -19,7 +19,7 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map($model->getCategories(), 'id', 'name')) ?>
 
-    <?= $form->field($model, 'section_id')->dropDownList(ArrayHelper::map($model->getSections(), 'id', 'name')) ?>
+    <?= $form->field($model, 'section_id')->dropDownList(ArrayHelper::map($model->getSections(false), 'id', 'name')) ?>
 
     <?= $form->field($model, 'brand_id')->dropDownList(ArrayHelper::map($model->getBrands(), 'id', 'name')) ?>
 

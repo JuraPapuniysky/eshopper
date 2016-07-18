@@ -28,6 +28,11 @@ class m160629_110256_gender extends Migration
         $this->insert('{{%gender}}', [
             'name' => 'Унисекс',
         ]);
+
+        $this->dropColumn('{{%brand}}', 'gender');
+        $this->addColumn('{{%brand}}', 'gender_id', Schema::TYPE_INTEGER. ' NOT NULL');
+        $this->createIndex('FK_brand_gender', '{{%brand}}', 'gender_id');
+        $this->addForeignKey('FK_brand_gender', '{{%brand}}', 'gender_id', '{{%gender}}', 'id');
     }
 
     public function down()
