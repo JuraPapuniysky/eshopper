@@ -24,23 +24,19 @@ class m160623_061117_tables extends Migration
         $this->createTable('{{%brand}}',[
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING. ' NOT NULL',
-            'category_id' => Schema::TYPE_INTEGER. ' NOT NULL',
-            'gender' => Schema::TYPE_STRING. ' NOT NULL',
             'description' => Schema::TYPE_TEXT,
             'image' => Schema::TYPE_STRING,
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
         ], $tableOptions);
 
-        $this->createIndex('FK_brand_category', '{{%brand}}', 'category_id');
-        $this->addForeignKey(
-            'FK_brand_category', '{{%brand}}', 'category_id', '{{%category}}', 'id'
-        );
+
 
         $this->createTable('{{%product}}',[
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING. ' NOT NULL',
             'category_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'brand_id' => Schema::TYPE_INTEGER. ' NOT NULL',
+            'gender_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'price' => Schema::TYPE_MONEY. ' NOT NULL',
             'description' => Schema::TYPE_TEXT,
             'section_id' => Schema::TYPE_INTEGER . ' NOT NULL',
