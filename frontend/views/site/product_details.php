@@ -23,6 +23,7 @@ use common\widgets\Brands;
         'images' => $images,
         'image' => $image,
         'brand' => $brand,
+        'size' => $size,
     ]) ?>
 </div>
 

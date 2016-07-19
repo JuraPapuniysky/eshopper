@@ -12,6 +12,7 @@ class ProductDetails extends Widget
     public $images;
     public $image;
     public $brand;
+    public $size;
 
 
     public function run()
@@ -21,6 +22,7 @@ class ProductDetails extends Widget
             'images' => $this->images,
             'image' => $this->image,
             'brand' => $this->brand,
+            'size' => $this->size,
         ]);
     }
 }

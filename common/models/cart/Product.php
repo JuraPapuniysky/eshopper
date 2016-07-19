@@ -12,7 +12,7 @@ class Product extends Model
     public $productId;
     public $count;
     public $name;
-    public $sizes = [];
+    public $size;
 
     public function add($size)
     {

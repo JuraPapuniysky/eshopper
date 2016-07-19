@@ -160,6 +160,14 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductAvailabilyty::className(), ['product_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSizes()
+    {
+        return $this->hasMany(Size::className(), ['product_id' => 'id']);
+    }
+
     public static function getProductsImages()
     {
         return (new Query())

@@ -4,8 +4,10 @@
 /* @var $image \backend\models\Image */
 /* @var $brand \backend\models\Brand */
 
-
-
+use yii\widgets\Pjax;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 ?>
 
 
@@ -53,12 +55,16 @@
                 <img src="/images/product-details/rating.png" alt="" />
 								<span>
 									<span>$ <?= money_format('%i', $product['price']) ?></span>
-									<label>Quantity:</label>
-									<input type="text" value="1" />
-									<a href="#" type="button" class="btn btn-fefault cart">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</a>
+                                    <?= Pjax::begin() ?>
+                                    <?= ActiveForm::begin() ?>
+									<!--<label>Quantity:</label>-->
+									<!--<input type="text" value="1" />-->
+                                    <?= Html::a('<i class="fa fa-shopping-cart"></i>Добавить в корзину',
+                                        ['/site/add-to-cart/', 'id' => $product['id'], 'size' => ''],
+                                        ['class' => 'btn btn-fefault cart', 'type' => 'button']
+                                    )?>
+                                    <?= ActiveForm::end()?>
+                                    <?= Pjax::end() ?>
 								</span>
                 <p><b>Availability:</b> In Stock</p>
                 <p><b>Condition:</b> New</p>
