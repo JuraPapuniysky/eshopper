@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property integer $category_id
+ * @property integer $gender_id
  * @property string $time_stamp
  *
  * @property Product[] $products
@@ -31,8 +32,8 @@ class Section extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'category_id'], 'required'],
-            [['category_id'], 'integer'],
+            [['name', 'category_id', 'gender_id'], 'required'],
+            [['category_id', 'gender_id'], 'integer'],
             [['time_stamp'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -49,6 +50,7 @@ class Section extends \yii\db\ActiveRecord
             'name' => 'Name',
             'category_id' => 'Category ID',
             'time_stamp' => 'Time Stamp',
+            'gender_id' => 'Gender',
         ];
     }
 
@@ -68,12 +70,27 @@ class Section extends \yii\db\ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGender()
+    {
+        return $this->hasOne(Gender::className(), ['id' => 'gender_id']);
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function getCategories()
     {
-        if($this->category_id == null) {
-            return Category::find()->all();
-        }else{
-            return Category::findAll(['id' => $this->category_id]);
-        }
+        return Category::find()->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getGenders()
+    {
+        return Gender::find()->all();
     }
 }

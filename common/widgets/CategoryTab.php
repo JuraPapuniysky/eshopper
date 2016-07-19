@@ -30,7 +30,7 @@ class CategoryTab extends Widget
 
         foreach ($this->products as $product)
         {
-            $this->image[$product->id] = $product->getMainImage();
+            $this->images[$product->id] = $product->getMainImage();
         }
     }
 

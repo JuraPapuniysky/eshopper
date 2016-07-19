@@ -18,7 +18,7 @@ class SectionSearch extends Section
     public function rules()
     {
         return [
-            [['id', 'category_id'], 'integer'],
+            [['id', 'category_id', 'gender_id'], 'integer'],
             [['name', 'time_stamp'], 'safe'],
         ];
     }
@@ -61,6 +61,7 @@ class SectionSearch extends Section
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
+            'gender_id' => $this->gender_id,
             'time_stamp' => $this->time_stamp,
         ]);
 

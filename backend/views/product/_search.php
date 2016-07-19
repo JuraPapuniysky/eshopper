@@ -23,9 +23,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'brand_id') ?>
 
-    <?= $form->field($model, 'price') ?>
+    <?= $form->field($model, 'gender_id') ?>
+
+    <?php // echo $form->field($model, 'price') ?>
 
     <?php // echo $form->field($model, 'description') ?>
+
+    <?php // echo $form->field($model, 'section_id') ?>
 
     <?php // echo $form->field($model, 'time_stamp') ?>
 

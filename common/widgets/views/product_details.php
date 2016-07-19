@@ -47,18 +47,18 @@
         </div>
         <div class="col-sm-7">
             <div class="product-information"><!--/product-information-->
-                <img src="/images/product-details/new.jpg" class="newarrival" alt="" />
+                <img src="" class="newarrival" alt="" />
                 <h2><?= $product['name'] ?></h2>
-                <p>Web ID: 1089772</p>
+                <p>Web ID: <?= $product['id'] ?></p>
                 <img src="/images/product-details/rating.png" alt="" />
 								<span>
-									<span><?= $product['price'] ?></span>
+									<span>$ <?= money_format('%i', $product['price']) ?></span>
 									<label>Quantity:</label>
 									<input type="text" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<a href="#" type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
-									</button>
+									</a>
 								</span>
                 <p><b>Availability:</b> In Stock</p>
                 <p><b>Condition:</b> New</p>

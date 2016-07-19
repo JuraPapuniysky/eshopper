@@ -72,23 +72,16 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex($category_id = null)
+    public function actionIndex($category_id = null, $section_id = null, $brand_id = null)
     {
        return $this->render('index',[
            'category_id' => $category_id,
+           'section_id' => $section_id,
+           'brand_id' => $brand_id,
        ]);
     }
 
-    /**
-     * @param null $product_category
-     * @return string
-     */
-    public function actionSection($product_section = null)
-    {
-        return $this->render('index',[
-            'product_section' => $product_section,
-        ]);
-    }
+
 
     /**
      * Opens a user cart

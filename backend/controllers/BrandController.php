@@ -2,9 +2,6 @@
 
 namespace backend\controllers;
 
-use backend\models\Category;
-use backend\models\Gender;
-use backend\models\Section;
 use Yii;
 use backend\models\Brand;
 use backend\models\BrandSearch;
@@ -73,9 +70,6 @@ class BrandController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'category' => Category::find()->all(),
-                'gender' => Gender::find()->all(),
-                'section' => Section::find()->all(),
             ]);
         }
     }
@@ -95,9 +89,6 @@ class BrandController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'category' => $model->getCategory()->all(),
-                'gender' => $model->getGender()->all(),
-                'section' => $model->getSection()->all(),
             ]);
         }
     }

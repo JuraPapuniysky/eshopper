@@ -130,6 +130,7 @@ class m160623_061117_tables extends Migration
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING. ' NOT NULL',
             'category_id' => Schema::TYPE_INTEGER. ' NOT NULL',
+            'gender_id' => Schema::TYPE_INTEGER. ' NOT NULL',
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
         ], $tableOptions);
 
@@ -144,6 +145,8 @@ class m160623_061117_tables extends Migration
         $this->addForeignKey(
             'FK_product_section', '{{%product}}', 'section_id', '{{%section}}', 'id'
         );
+
+        
 
         $this->createIndex('FK_size_product_order', '{{%order_product}}', 'size_id');
         $this->addForeignKey(

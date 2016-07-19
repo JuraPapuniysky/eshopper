@@ -38,8 +38,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'category_id', 'brand_id', 'price', 'section_id'], 'required'],
-            [['category_id', 'brand_id', 'section_id'], 'integer'],
+            [['name', 'category_id', 'brand_id', 'price', 'section_id', 'gender_id'], 'required'],
+            [['category_id', 'brand_id', 'section_id', 'gender_id'], 'integer'],
             [['price'], 'number'],
             [['description'], 'string'],
             [['time_stamp'], 'safe'],
@@ -60,6 +60,7 @@ class Product extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
             'brand_id' => 'Brand ID',
             'price' => 'Price',
+            'gender_id' => 'Gender',
             'description' => 'Description',
             'section_id' => 'Section',
             'time_stamp' => 'Time Stamp',
@@ -92,7 +93,7 @@ class Product extends \yii\db\ActiveRecord
      * @param $imageId
      * @return \yii\db\ActiveQuery
      */
-    public function getMainImage($imageId)
+    public function getMainImage($imageId = null)
     {
         if($imageId == null)
         {
@@ -148,7 +149,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getBrands()
     {
-        return Brand::findAll(['category_id' => $this->category_id, 'section_id' => $this->section_id]);
+        return Brand::find()->all();
     }
 
     /**

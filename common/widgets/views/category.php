@@ -23,9 +23,9 @@ use yii\helpers\Html;
         <div id="<?= str_replace(' ', '_', $category['name'])?>" class="panel-collapse collapse">
             <div class="panel-body">
                 <ul>
-                    <li><a href="#">All products of category</a></li>
+                    <li><?= Html::a('Все товары категории', ['index', 'category_id' => $category['id']], []) ?></li>
                     <?php foreach($sections as $section){ ?>
-                    <li><?= Html::a($section['name'], ['section', 'product_section' => $section['id']], []) ?></li>
+                    <li><?= Html::a($section['name'], ['index', 'section_id' => $section['id']], []) ?></li>
                     <?php } ?>
                 </ul>
             </div>

@@ -3,6 +3,7 @@
 namespace common\widgets;
 
 
+use backend\models\Image;
 use backend\models\Product;
 use yii\bootstrap\Widget;
 use yii\data\Pagination;
@@ -19,38 +20,51 @@ class FeaturesItems extends Widget
 
     public $images;
 
-    public $product_section;
+    public $category_id;
 
-    private $_count;
+    public $section_id;
 
-    public function setData($product_section)
+    public $brand_id;
+
+
+    public function setData($category_id, $section_id, $brand_id)
     {
-        if($product_section != null) {
-            $this->products = Product::findAll(['section_id' => $product_section]);
-            $this->_count - Product::find()->where(['section_id' => $product_section])->count();
+
+        if($section_id != null) {
+           $this->getData(['section_id' => $section_id]);
+        }elseif ($brand_id != null){
+            $this->getData(['brand_id' => $brand_id]);
+        }elseif ($category_id != null){
+            $this->getData(['category_id' => $category_id]);
         }else{
-            $this->products = Product::find();
-            $this->_count - Product::find()->count();
+            $this->getData();
         }
-        foreach ($this->products as $product)
-        {
-            $this->images[$product->id] = $product->getMainImage();
-        }
+
+
+    }
+
+    private function getData($condition = null)
+    {
+        $this->products = Product::find()->where($condition)->orderBy(['time_stamp' => SORT_DESC]);
     }
 
     public function pagination()
     {
-        $this->pages = new Pagination(['totalCount' => $this->products->count(), 'pageSize' => self::PAGE_SIZE]);
-        $this->pages->pageSizeParam = false;
+        $this->pages = new Pagination(['totalCount' => $this->products->count(), 'pageSize' => static::PAGE_SIZE]);
+        //$this->pages->pageSizeParam = false;
         $this->model = $this->products->offset($this->pages->offset)->limit($this->pages->limit)->all();
+        foreach ($this->model as $product)
+        {
+            $this->images[$product['id']] = Image::findAll(['product_id' => $product['id'], 'description' => 0]);
+        }
     }
 
     public function run()
     {
-        $this->setData($this->product_section);
+        $this->setData($this->category_id, $this->section_id, $this->brand_id);
         $this->pagination();
         return $this->render('features_items',[
-            'products' => $this->model,
+            'products' => array_reverse($this->model),
             'pages' => $this->pages,
             'images' => $this->images,
             

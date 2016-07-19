@@ -2,16 +2,12 @@
 
 namespace backend\controllers;
 
-use backend\models\Brand;
-use backend\models\Image;
 use Yii;
 use backend\models\Product;
 use backend\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\models\Category;
-
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -57,7 +53,6 @@ class ProductController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'images' => Image::find()->where(['product_id' => $id])->all(),
         ]);
     }
 
@@ -94,8 +89,6 @@ class ProductController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'category' => Category::find()->all(),
-                'brand' => Brand::find()->all(),
             ]);
         }
     }

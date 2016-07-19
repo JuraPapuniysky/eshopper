@@ -15,6 +15,7 @@ class Brands extends Widget
         foreach (Brand::find()->all() as $brand)
         {
             $dataWidget[$brand['name']] = [
+                'id' => $brand['id'],
                 'name' => $brand['name'],
                 'count' => Product::find()->where(['brand_id' => $brand['id']])->count(),
             ];

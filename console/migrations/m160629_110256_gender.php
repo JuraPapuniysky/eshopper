@@ -29,7 +29,10 @@ class m160629_110256_gender extends Migration
             'name' => 'Унисекс',
         ]);
 
-
+        $this->createIndex('FK_section_gender', '{{%section}}', 'gender_id');
+        $this->addForeignKey(
+            'FK_section_gender', '{{%section}}', 'gender_id', '{{%gender}}', 'id'
+        );
 
         $this->createIndex('FK_product_gender', '{{%product}}', 'gender_id');
         $this->addForeignKey('FK_product_gender', '{{%product}}', 'gender_id', '{{%gender}}', 'id');

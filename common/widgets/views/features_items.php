@@ -9,44 +9,48 @@ use yii\helpers\Html;
         <h2 class="title text-center">Features Items</h2>
 
         <?php
-        Pjax::begin();
-        foreach ($products as $product){ ?>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="<?= $image[$product['id']['src']]?>" alt="" />
-                        <h2>$ <?= money_format('%i', $product['price']) ?></h2>
-                        <p><?= $product['name'] ?></p>
-                        <?= Html::a(
-                        '<i class="fa fa-shopping-cart"></i>Product Details',
-                        ['/site/product-details/', 'id' => $product['id'] ],
-                        ['class' => 'btn btn-default add-to-cart', 'id' => 'muted_user']
-                        );?>
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
+
+        foreach ($products as $product){
+            $image = $images[$product['id']];
+            ?>
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="<?= $image[0]->src?>" alt="" />
                             <h2>$ <?= money_format('%i', $product['price']) ?></h2>
                             <p><?= $product['name'] ?></p>
                             <?= Html::a(
                                 '<i class="fa fa-shopping-cart"></i>Product Details',
-                                ['/site/product-details/', 'id' => $product['id']],
+                                ['/site/product-details/', 'id' => $product['id'] ],
                                 ['class' => 'btn btn-default add-to-cart', 'id' => 'muted_user']
                             );?>
                         </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>$ <?= money_format('%i', $product['price']) ?></h2>
+                                <p><?= $product['name'] ?></p>
+                                <?= Html::a(
+                                    '<i class="fa fa-shopping-cart"></i>Product Details',
+                                    ['/site/product-details/', 'id' => $product['id']],
+                                    ['class' => 'btn btn-default add-to-cart', 'id' => 'muted_user']
+                                );?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                    </ul>
-                </div>
             </div>
+        <?php } ?>
+        <div>
+
         </div>
-        <?php }
-
-        Pjax::end();
-        ?>
-
     </div><!--features_items-->
+<?php echo LinkPager::widget([
+'pagination' => $pages,
+]); ?>

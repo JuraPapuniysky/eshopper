@@ -5,7 +5,6 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
-/* @var $images backend\models\Images */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -33,24 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'category_id',
             'brand_id',
+            'gender_id',
             'price',
             'description:ntext',
+            'section_id',
             'time_stamp',
         ],
     ]) ?>
 
-    <div class="row">
-<?php foreach ($images as $image){ ?>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="<?= $image::PATH_TO_FRONTEND . $image->src ?>">
-                <div class="caption">
-                    <h3><?= $image->description ?></h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-    </div>
 </div>

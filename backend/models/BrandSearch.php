@@ -18,7 +18,7 @@ class BrandSearch extends Brand
     public function rules()
     {
         return [
-            [['id', 'category_id', 'section_id', 'gender_id'], 'integer'],
+            [['id'], 'integer'],
             [['name', 'description', 'image', 'time_stamp'], 'safe'],
         ];
     }
@@ -60,10 +60,7 @@ class BrandSearch extends Brand
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
             'time_stamp' => $this->time_stamp,
-            'section_id' => $this->section_id,
-            'gender_id' => $this->gender_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
