@@ -4,6 +4,7 @@
 /* @var $images backend\models\Image */
 /* @var $image backend\models\Image */
 /* @var $brand backend\models\Brand */
+/* @var $modelCart \common\models\cart\Product*/
 
 use common\widgets\ProductDetails;
 use common\widgets\Category;
@@ -24,6 +25,7 @@ use common\widgets\Brands;
         'image' => $image,
         'brand' => $brand,
         'size' => $size,
+        'modelCart' => $modelCart,
     ]) ?>
 </div>
 

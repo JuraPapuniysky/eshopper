@@ -3,6 +3,7 @@
 /* @var $images \backend\models\Image */
 /* @var $image \backend\models\Image */
 /* @var $brand \backend\models\Brand */
+/* @var $modelCart \common\models\cart\Product*/
 
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
@@ -15,7 +16,7 @@ use yii\widgets\ActiveForm;
 <div class="product-details"><!--product-details-->
     <div class="col-sm-5">
         <div class="view-product">
-            <img src="<?= $image->src?>" alt="" />
+            <img src="<?= $image->src ?>" alt="" />
             <h3>ZOOM</h3>
         </div>
         <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -55,16 +56,18 @@ use yii\widgets\ActiveForm;
                 <img src="/images/product-details/rating.png" alt="" />
 								<span>
 									<span>$ <?= money_format('%i', $product['price']) ?></span>
-                                    <?= Pjax::begin() ?>
-                                    <?= ActiveForm::begin() ?>
-									<!--<label>Quantity:</label>-->
-									<!--<input type="text" value="1" />-->
-                                    <?= Html::a('<i class="fa fa-shopping-cart"></i>Добавить в корзину',
-                                        ['/site/add-to-cart/', 'id' => $product['id'], 'size' => ''],
+                                    <?php Pjax::begin() ?>
+                                    <?php $form = ActiveForm::begin() ?>
+									<label>Quantity:</label>
+                                    <?= $form->field($modelCart, 'quantity')->textInput(['maxlength' => true]) ?>
+
+                                    <?= $form->field($modelCart, 'size')->dropDownList(ArrayHelper::map($size, 'id', 'size')) ?>
+                                    <?php $modelCart->productId = $product['id'] ?>
+                                    <?= Html::submitButton('<i class="fa fa-shopping-cart"></i>Добавить в корзину',
                                         ['class' => 'btn btn-fefault cart', 'type' => 'button']
                                     )?>
-                                    <?= ActiveForm::end()?>
-                                    <?= Pjax::end() ?>
+                                    <?php ActiveForm::end()?>
+                                    <?php Pjax::end() ?>
 								</span>
                 <p><b>Availability:</b> In Stock</p>
                 <p><b>Condition:</b> New</p>

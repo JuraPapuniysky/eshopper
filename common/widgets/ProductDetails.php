@@ -4,6 +4,7 @@
 namespace common\widgets;
 
 
+
 use yii\bootstrap\Widget;
 
 class ProductDetails extends Widget
@@ -13,6 +14,7 @@ class ProductDetails extends Widget
     public $image;
     public $brand;
     public $size;
+    public $modelCart;
 
 
     public function run()
@@ -23,6 +25,7 @@ class ProductDetails extends Widget
             'image' => $this->image,
             'brand' => $this->brand,
             'size' => $this->size,
+            'modelCart' => $this->modelCart,
         ]);
     }
 }

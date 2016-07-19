@@ -92,16 +92,11 @@ class SiteController extends Controller
         return $this->render('cart');
     }
 
-    public function actionAddToCart($id, $size)
+    public function actionAddToCart()
     {
-        $model = new \common\models\cart\Product();
+
         
-        if($model->load(Yii::$app->request->post()))
-        {
-            
-        }
-        
-        Yii::$app->components->cart->add($id, $size);
+
     }
 
     /**
@@ -116,12 +111,19 @@ class SiteController extends Controller
         $image = $product->getMainImage($imageId);
         $brand = $product->getBrand();
 
+        $modelCart = new \common\models\cart\Product();
+
+        if($modelCart->load(Yii::$app->request->post()))
+        {
+            Yii::$app->components->cart->add($modelCart->productId, $modelCart->size);
+        }
         return $this->render('product_details', [
             'product' => $product,
             'images' => $product->getImagesGroup(),
             'image' => $image,
             'brand' => $brand,
             'size' => $product->getSizes()->all(),
+            'modelCart' => $modelCart,
         ]);
     }
 
