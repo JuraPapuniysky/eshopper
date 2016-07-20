@@ -18,6 +18,9 @@ use Yii;
  */
 class Cart extends \yii\db\ActiveRecord
 {
+
+    public static $total_price;
+
     /**
      * @inheritdoc
      */
@@ -118,6 +121,7 @@ class Cart extends \yii\db\ActiveRecord
         $cartProducts = static::findAll(['user_token'=>$user_token]);
         $product = [];
         $count = 0;
+        $tmp = 0;
         foreach ($cartProducts as $cartProduct)
         {
             $prod = Product::findProductById($cartProduct->product_id);
@@ -139,6 +143,9 @@ class Cart extends \yii\db\ActiveRecord
                 'product_total_price' => $prod->price * $cartProduct->quantity,
             ];
             $count++;
+            $tmp = $prod->price * $cartProduct->quantity;
+
+            self::$total_price = self::$total_price + $tmp;
         }
         return $product;
     }

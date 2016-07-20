@@ -98,6 +98,7 @@ class SiteController extends Controller
         }else{
         return $this->render('cart', [
             'products' => Cart::getCartProduct(),
+            'total_price' => Cart::$total_price,
         ]);
     }
     }

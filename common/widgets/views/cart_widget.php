@@ -57,6 +57,16 @@ use \yii\helpers\Html;
                         </td>
                     </tr>
                 <?php }?>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">$<?=$total_price?></p></td>
+                    <td><?= Html::a('Заказать', ['/site/order/', 'method' => 'cart'],['class' => 'btn btn-primary']) ?></td>
+                </tr>
                 </tbody>
             </table>
         </div>
