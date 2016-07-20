@@ -2,8 +2,8 @@
 namespace frontend\controllers;
 
 use backend\models\Image;
+use backend\models\Cart;
 use backend\models\Product;
-use common\components\Cart;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -88,17 +88,20 @@ class SiteController extends Controller
      * Opens a user cart
      * @return string
      */
-    public function actionCart()
-    {
-        return $this->render('cart');
-    }
-
-    public function actionAddToCart()
+    public function actionCart($id = null, $action = null)
     {
 
-        
-
+        if($action != null && $id != null)
+        {
+            Cart::action($id, $action);
+            return $this->redirect('/site/cart/');
+        }else{
+        return $this->render('cart', [
+            'products' => Cart::getCartProduct(),
+        ]);
     }
+    }
+    
 
     /**
      * Opens a product details
@@ -112,12 +115,17 @@ class SiteController extends Controller
         $image = $product->getMainImage($imageId);
         $brand = $product->getBrand();
 
-        $modelCart = new \common\models\cart\Product();
+        $modelCart = new Cart();
+
 
         if($modelCart->load(Yii::$app->request->post()))
         {
-            
-        
+            $modelCart->product_id = $id;
+            $modelCart->add();
+            if($modelCart->save())
+            {
+                Yii::$app->session->setFlash('success','Товар добавлен в корзину!');
+            }
         }
         return $this->render('product_details', [
             'product' => $product,

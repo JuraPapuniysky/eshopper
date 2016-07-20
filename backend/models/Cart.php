@@ -63,6 +63,14 @@ class Cart extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return int
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['id' => 'product_id']);
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getSize()
@@ -73,23 +81,85 @@ class Cart extends \yii\db\ActiveRecord
     public function add()
     {
         $session = Yii::$app->session;
-        if($session->isActive){
-            if($session->has('user_token')){
-                $this->saveProduct();
+        if(!$session->isActive) {
+
+            $session->open();
+        }
+        if($session->has('user_token')){
+                $this->setUserToken();
             }else{
                 if(Yii::$app->user->isGuest) {
-                    $session->set('user_token', time());
+                    $session->set('user_token', date('YmdHis'));
                 }else{
                     $session->set('user_token', Yii::$app->user->id);
                 }
-                $this->saveProduct();
+                $this->setUserToken();
             }
-        }
+
     }
 
-    public function saveProduct()
+    /**
+     *
+     */
+    public function setUserToken()
     {
-        $this->user_token = Yii::$app->session->get('user_token');
-        $this->save();
+        $this->user_token = (string)Yii::$app->session->get('user_token');
+    }
+
+
+    /**
+     * @param $user_token
+     * @return array
+     */
+    public static function getCartProduct()
+    {
+        $session = Yii::$app->session;
+        $user_token = $session->get('user_token');
+        $cartProducts = static::findAll(['user_token'=>$user_token]);
+        $product = [];
+        $count = 0;
+        foreach ($cartProducts as $cartProduct)
+        {
+            $prod = Product::findProductById($cartProduct->product_id);
+            $product[$count] = [
+                'cart_id' => $cartProduct->id,
+                'product_id' => $cartProduct->product_id,
+                'product_name' => $prod->name,
+                'product_image' => str_replace(
+                    '/images/products/',
+                    '/mini-images/products/',
+                    Image::findOne(
+                    [
+                        'product_id' => $cartProduct->product_id,
+                        'description' => 0
+                    ])->src),
+                'product_size' => Size::findOne(['id' => $cartProduct->size_id])->size,
+                'product_price' => money_format('%i', $prod->price),
+                'product_quantity' => $cartProduct->quantity,
+                'product_total_price' => $prod->price * $cartProduct->quantity,
+            ];
+            $count++;
+        }
+        return $product;
+    }
+
+    public static function action($id, $action)
+    {
+        switch ($action) {
+            case 'delete':
+                static::findOne(['id' => $id])->delete();
+                break;
+            case 'quantity_up':
+                $product = static::findOne([['id' => $id]]);
+                $product->quantity++;
+                $product->save();
+                break;
+            case 'quantity_down':
+                $product = static::findOne([['id' => $id]]);
+                $product->quantity--;
+                $product->save();
+                break;
+        }
+
     }
 }

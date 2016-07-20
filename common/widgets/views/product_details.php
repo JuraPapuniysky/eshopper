@@ -59,15 +59,10 @@ use yii\widgets\ActiveForm;
                                     <?php Pjax::begin() ?>
                                     <?php $form = ActiveForm::begin() ?>
                                     
-                                    <?= $form->field($modelCart, 'quantity')->textInput(['maxlength' => true, 'value' => 1]) ?>
+                                    <?= $form->field($modelCart, 'quantity')->textInput(['maxlength' => true, 'value' => '1']) ?>
                                     
-                                    <?= $form->field($modelCart, 'size')->dropDownList(ArrayHelper::map($size, 'id', 'size')) ?>
-                                    
-                                    <?php
-                                    $modelCart->product_id = $product['id'];
+                                    <?= $form->field($modelCart, 'size_id')->dropDownList(ArrayHelper::map($size, 'id', 'size')) ?>
 
-                                    ?>
-                                    
                                     <?= Html::submitButton('<i class="fa fa-shopping-cart"></i>Добавить в корзину',
                                         ['class' => 'btn btn-fefault cart', 'type' => 'button']
                                     )?>
@@ -83,5 +78,5 @@ use yii\widgets\ActiveForm;
         </div>
     </div><!--/product-details-->
 <pre>
-    <?php print_r(Yii::$app->user); ?>
+    <?php print_r(Yii::$app->session->get('user_token')); ?>
 </pre>
