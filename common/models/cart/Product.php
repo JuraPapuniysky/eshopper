@@ -5,25 +5,42 @@ namespace common\models\cart;
 
 
 use yii\base\Model;
-
+/**
+ * This is the model class for table "brand".
+ *
+ * @property integer $product_id
+ * @property integer $quantity
+ * @property integer $size
+ * @property integer $time
+ *
+ *
+ *
+ */
 class Product extends Model
 {
 
-    public $productId;
-    public $quantity;
     public $size;
+    public $product_id;
 
-    public function add($size)
+    public $quantity;
+
+
+
+    public function rules()
     {
-        $this->count++;
-        $this->sizes[$this->count] = $size;
+        return [
+            [['quantity', 'product_id', 'size', ], 'required'],
+            [['quantity', 'product_id', 'size', ], 'integer'],
+        ];
     }
 
-    public function remove()
+    public function attributeLabels()
     {
-        $this->count--;
+        return [
+            'product_id' => 'Product_id',
+            'quantity' => 'Quantity:',
+            'size' => 'Size',
+            'time' => 'Time',
+        ];
     }
-
-    
-
 }

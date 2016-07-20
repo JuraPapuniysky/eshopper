@@ -6,10 +6,5 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
     ],
-    'components' => [
-        'cart' =>[
-            'class' => 'common\components\Cart',
-            
-        ],
-    ],
+    
 ];

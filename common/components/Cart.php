@@ -37,7 +37,6 @@ class Cart extends Component
         }else{
             $cartProduct = new Product();
             $cartProduct->productId = $productId;
-            $cartProduct->name = $productId->name;
             $cartProduct->add($size);
             $this->products[$productId] = $cartProduct;
             $this->session->set('products', $this->products);

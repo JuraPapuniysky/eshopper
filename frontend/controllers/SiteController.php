@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use backend\models\Image;
 use backend\models\Product;
+use common\components\Cart;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -115,7 +116,8 @@ class SiteController extends Controller
 
         if($modelCart->load(Yii::$app->request->post()))
         {
-            Yii::$app->components->cart->add($modelCart->productId, $modelCart->size);
+            
+        
         }
         return $this->render('product_details', [
             'product' => $product,
