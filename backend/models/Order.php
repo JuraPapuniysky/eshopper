@@ -68,23 +68,23 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasMany(OrderProduct::className(), ['order_id' => 'id']);
     }
 
-    public function add()
+    public function add($order_number)
     {
-        $user_token = Yii::$app->session->get('user_token');
-        $this->order_number = $user_token;
+        $this->order_number = $order_number;
+        $this->status = 0;
         if($this->save())
         {
-            $order = $this->findOne(['order_numder' => $user_token]);
-            $products = Cart::findAll(['user_token' => $user_token]);
+            $order = $this->findOne(['order_number' => $order_number]);
+            $products = Cart::findAll(['user_token' => $order_number]);
 
             foreach ($products as $product)
             {
-
                 $order_product = new OrderProduct();
                 $order_product->order_id = $order->id;
                 $order_product->product_id = $product->product_id;
                 $order_product->size_id = $product->size_id;
                 $order_product->count = $product->quantity;
+
                 if($order_product->save())
                 {
                     unset($order_product);

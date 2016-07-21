@@ -108,13 +108,18 @@ class SiteController extends Controller
     public function actionOrder($id = null)
     {
         $modelCart = new Cart();
+        $model = new Order();
         if($modelCart->load(Yii::$app->request->post()))
         {
             $modelCart->product_id = $id;
             $modelCart->add();
             if($modelCart->save())
             {
-                return $this->render('order_form');
+
+                return $this->render('order_form', [
+                    'model' => $model,
+                ]);
+
             }else{
                 return $this->redirect('site/index');
             }
@@ -124,9 +129,17 @@ class SiteController extends Controller
     public function actionOrderForm()
     {
         $order = new Order();
-
+        $order_number = Yii::$app->session->get('user_token');
+        
         if($order->load(Yii::$app->request->post())){
-            $order->add();
+            $order->add($order_number);
+            return $this->render('order_success',[
+                'order_number' => $order_number,
+            ]);
+        }else{
+            return $this->render('order_form',[
+                'model' => $order,
+            ]);
         }
     }
 
