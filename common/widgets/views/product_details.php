@@ -57,6 +57,7 @@ use yii\widgets\ActiveForm;
 								<span>
 									<span>$ <?= money_format('%i', $product['price']) ?></span>
                                     <?php Pjax::begin() ?>
+
                                     <?php $form = ActiveForm::begin() ?>
                                     
                                     <?= $form->field($modelCart, 'quantity')->textInput(['maxlength' => true, 'value' => '1']) ?>
@@ -68,6 +69,7 @@ use yii\widgets\ActiveForm;
                                     )?>
                                     
                                     <?php ActiveForm::end()?>
+                                    
                                     <?php Pjax::end() ?>
 								</span>
                 <p><b>Availability:</b> In Stock</p>
@@ -77,6 +79,3 @@ use yii\widgets\ActiveForm;
             </div><!--/product-information-->
         </div>
     </div><!--/product-details-->
-<pre>
-    <?php print_r(Yii::$app->session->get('user_token')); ?>
-</pre>
