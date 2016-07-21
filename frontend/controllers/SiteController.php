@@ -3,6 +3,8 @@ namespace frontend\controllers;
 
 use backend\models\Image;
 use backend\models\Cart;
+use backend\models\Order;
+use backend\models\OrderProduct;
 use backend\models\Product;
 use Yii;
 use yii\base\InvalidParamException;
@@ -102,7 +104,44 @@ class SiteController extends Controller
         ]);
     }
     }
-    
+
+    public function actionOrder($id = null)
+    {
+        $modelCart = new Cart();
+        $model = new Order();
+        if($modelCart->load(Yii::$app->request->post()))
+        {
+            $modelCart->product_id = $id;
+            $modelCart->add();
+            if($modelCart->save())
+            {
+
+                return $this->render('order_form', [
+                    'model' => $model,
+                ]);
+
+            }else{
+                return $this->redirect('site/index');
+            }
+        }
+    }
+
+    public function actionOrderForm()
+    {
+        $order = new Order();
+        $order_number = Yii::$app->session->get('user_token');
+        
+        if($order->load(Yii::$app->request->post())){
+            $order->add($order_number);
+            return $this->render('order_success',[
+                'order_number' => $order_number,
+            ]);
+        }else{
+            return $this->render('order_form',[
+                'model' => $order,
+            ]);
+        }
+    }
 
     /**
      * Opens a product details

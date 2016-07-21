@@ -67,10 +67,11 @@ use yii\widgets\ActiveForm;
                                     <?= Html::submitButton('<i class="fa fa-shopping-cart"></i>Добавить в корзину',
                                         ['class' => 'btn btn-fefault cart', 'type' => 'button']
                                     )?>
-                                    
+
                                     <?php ActiveForm::end()?>
                                     
                                     <?php Pjax::end() ?>
+                                    
 								</span>
                 <p><b>Availability:</b> In Stock</p>
                 <p><b>Condition:</b> New</p>

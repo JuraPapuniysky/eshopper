@@ -49,6 +49,8 @@
                             ['label' => 'Size', 'icon' => 'fa fa-file-code-o', 'url' => ['/size'],],
                             ['label' => 'Gender', 'icon' => 'fa fa-file-code-o', 'url' => ['/gender'],],
 
+                            ['label' => 'Order', 'icon' => 'fa fa-file-code-o', 'url' => ['/order'],],
+
                             [
                                 'label' => 'Level One',
                                 'icon' => 'fa fa-circle-o',
