@@ -152,17 +152,19 @@ class Cart extends \yii\db\ActiveRecord
 
     public static function action($id, $action)
     {
+        $product = static::findOne([
+            'id' => $id,
+            'user_token' => Yii::$app->session->get('user_token')]);
+
         switch ($action) {
             case 'delete':
-                static::findOne(['id' => $id])->delete();
+                $product->delete();
                 break;
             case 'quantity_up':
-                $product = static::findOne([['id' => $id]]);
                 $product->quantity++;
                 $product->save();
                 break;
             case 'quantity_down':
-                $product = static::findOne([['id' => $id]]);
                 $product->quantity--;
                 $product->save();
                 break;
