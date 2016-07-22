@@ -39,6 +39,8 @@ class Order extends \yii\db\ActiveRecord
             [['status'], 'integer'],
             [['time_stamp'], 'safe'],
             [['first_name', 'last_name', 'email', 'phone', 'addres', 'order_number'], 'string', 'max' => 255],
+            [['email'], 'email'],
+            ['phone', 'match', 'pattern' => '/^\d+$/', 'message' => 'Номер телефона содержит только цифры'],
         ];
     }
 
@@ -49,11 +51,11 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'email' => 'Email',
-            'phone' => 'Phone',
-            'addres' => 'Addres',
+            'first_name' => '',
+            'last_name' => '',
+            'email' => '',
+            'phone' => '',
+            'addres' => '',
             'status' => 'Status',
             'time_stamp' => 'Time Stamp',
             'order_number' => 'Order Number',
