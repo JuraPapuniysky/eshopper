@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2016 at 04:24 PM
--- Server version: 5.7.12-0ubuntu1.1
+-- Generation Time: Jul 22, 2016 at 02:44 PM
+-- Server version: 5.7.13-0ubuntu0.16.04.2
 -- PHP Version: 7.0.4-7ubuntu2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -44,6 +44,29 @@ INSERT INTO `brand` (`id`, `name`, `description`, `image`, `time_stamp`) VALUES
 (3, 'Daminika', '', '', '2016-07-19 09:54:31'),
 (4, 'Justor ', '', '', '2016-07-19 10:25:18'),
 (5, 'Mohito', '', '', '2016-07-19 06:48:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_token`, `product_id`, `size_id`, `quantity`) VALUES
+(31, '20160721124907', 4, 7, 1),
+(32, '20160721130858', 4, 7, 1),
+(33, '20160722060530', 4, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -145,7 +168,9 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 ('m130524_201442_init', 1468903588),
 ('m160623_061117_tables', 1468903598),
 ('m160629_110256_gender', 1468903599),
-('m160719_052642_update_section', 1468906270);
+('m160719_052642_update_section', 1468906270),
+('m160720_063725_table_cart', 1468997433),
+('m160721_073410_update_order', 1469086642);
 
 -- --------------------------------------------------------
 
@@ -161,8 +186,17 @@ CREATE TABLE `order` (
   `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `addres` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '1',
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `order_number` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `first_name`, `last_name`, `email`, `phone`, `addres`, `status`, `time_stamp`, `order_number`) VALUES
+(3, 'fhythtyh', 'thyythtyh', 'tyhtyhtyh', 'tyhtyhtyh', 'tyhtyhtyh', 0, '2016-07-21 13:12:57', '20160721131153'),
+(4, 'tyhetyjetj', 'etyjetyje', 'jetyjejeyt', 'etyjeytjetyj', 'etyjetyjeyje', 0, '2016-07-21 13:13:37', '20160721131316');
 
 -- --------------------------------------------------------
 
@@ -176,6 +210,19 @@ CREATE TABLE `order_product` (
   `order_id` int(11) NOT NULL,
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_product`
+--
+
+INSERT INTO `order_product` (`product_id`, `size_id`, `order_id`, `count`) VALUES
+(2, 3, 3, 1),
+(1, 1, 3, 2),
+(1, 1, 3, 1),
+(1, 1, 3, 1),
+(4, 7, 4, 1),
+(4, 7, 4, 1),
+(4, 7, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -312,6 +359,14 @@ ALTER TABLE `brand`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_cart_product` (`product_id`),
+  ADD KEY `FK_cart_size` (`size_id`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -401,6 +456,11 @@ ALTER TABLE `user`
 ALTER TABLE `brand`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
@@ -419,7 +479,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -448,6 +508,13 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `FK_cart_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FK_cart_size` FOREIGN KEY (`size_id`) REFERENCES `size` (`id`);
 
 --
 -- Constraints for table `image`

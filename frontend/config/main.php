@@ -35,7 +35,11 @@ return [
             'rules' => [
             ],
         ],
-        
+    ],
+    'modules' => [
+        'blog' => [
+            'class' => 'frontend\modules\blog\Blog',
+        ],
     ],
     'params' => $params,
 ];
