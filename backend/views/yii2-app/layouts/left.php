@@ -46,6 +46,7 @@
                             ['label' => 'Brand', 'icon' => 'fa fa-file-code-o', 'url' => ['/brand'],],
                             ['label' => 'Product', 'icon' => 'fa fa-file-code-o', 'url' => ['/product'],],
                             ['label' => 'Image', 'icon' => 'fa fa-file-code-o', 'url' => ['/image'],],
+                            ['label' => 'Post', 'icon' => 'fa fa-file-code-o', 'url' => ['/post'],],
                             ['label' => 'Size', 'icon' => 'fa fa-file-code-o', 'url' => ['/size'],],
                             ['label' => 'Gender', 'icon' => 'fa fa-file-code-o', 'url' => ['/gender'],],
 

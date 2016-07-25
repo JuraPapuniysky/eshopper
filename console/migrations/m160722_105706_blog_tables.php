@@ -16,12 +16,12 @@ class m160722_105706_blog_tables extends Migration
         $this->createTable('{{%post}}',[
             'id' => Schema::TYPE_PK,
             'title' => Schema::TYPE_STRING. ' NOT NULL',
-            'text_preview' => Schema::TYPE_STRING . 'NOT NULL',
-            'preview_image_id' => Schema::TYPE_INTEGER,
+            'text_preview' => Schema::TYPE_STRING . ' NOT NULL',
             'author_id' => Schema::TYPE_INTEGER,
             'text' => Schema::TYPE_TEXT,
-            'create at' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
-            'update at' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
+            'image' => Schema::TYPE_STRING,
+            'create_at' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
+            
         ], $tableOptions);
 
         $this->createIndex('FK_post_user', '{{%post}}', 'author_id');
