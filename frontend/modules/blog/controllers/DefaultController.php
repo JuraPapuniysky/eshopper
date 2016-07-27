@@ -20,4 +20,15 @@ class DefaultController extends Controller
             'model' => Post::find()->orderBy(['create_at' => SORT_DESC]),
         ]);
     }
+
+    public function actionPost($id)
+    {
+        $post = Post::findAll(['id' => $id]);
+
+
+        return $this->render('post', [
+            'post' => $post,
+            //'comment' => $comment,
+        ]);
+    }
 }

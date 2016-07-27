@@ -2,10 +2,10 @@
 
 use common\widgets\Category;
 use common\widgets\Brands;
-use common\widgets\BlogList;
 
 
-/* @var $model common\models\Post */
+/* @var $post common\models\Post */
+/* @var $comment common\models\Comment */
 /* @var $this \yii\base\View */
 
 ?>
@@ -21,7 +21,10 @@ use common\widgets\BlogList;
 </div>
 <div class="col-sm-9 ">
 
-    <?= BlogList::widget(['model' => $model]) ?>
+    <?= \common\widgets\Post::widget(['model' => $post]) ?>
     
+    <?= $this->render('comment_form', [
+        'comment' => $comment,
+    ]) ?>
 
 </div>
