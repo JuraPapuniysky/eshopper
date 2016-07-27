@@ -129,15 +129,16 @@ class SiteController extends Controller
     public function actionOrderForm()
     {
         $order = new Order();
-        $order_number = Yii::$app->session->get('user_token');
         
-        if($order->load(Yii::$app->request->post()) && $order->validate()){
+        $order_number = Yii::$app->session->get('user_token');
+        Yii::$app->user->identity->getAuthKey();
+        if($order->load(Yii::$app->request->post())){
             $order->add($order_number);
-            return $this->render('order_success',[
+            return $this->render('order_success', [
                 'order_number' => $order_number,
             ]);
         }else{
-            return $this->render('order_form',[
+            return $this->render('order_form', [
                 'model' => $order,
             ]);
         }
