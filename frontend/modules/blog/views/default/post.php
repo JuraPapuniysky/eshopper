@@ -21,10 +21,12 @@ use common\widgets\Brands;
 </div>
 <div class="col-sm-9 ">
 
-    <?= \common\widgets\Post::widget(['model' => $post]) ?>
+    <?= \common\widgets\Post::widget(['post' => $post]) ?>
+
+    <?= \common\widgets\Comment::widget(['comment' => $comment]) ?>
     
     <?= $this->render('comment_form', [
-        'comment' => $comment,
+        'model' => $comment_model,
     ]) ?>
 
 </div>

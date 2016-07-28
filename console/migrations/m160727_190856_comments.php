@@ -21,7 +21,6 @@ class m160727_190856_comments extends Migration
             'text' => Schema::TYPE_TEXT . ' NOT NULL',
             'user_id' => Schema::TYPE_INTEGER,
             'post_id' => Schema::TYPE_INTEGER.' NOT NULL',
-            'text' => Schema::TYPE_TEXT,
             'time_stamp' => Schema::TYPE_TIMESTAMP. ' NOT NULL',
 
         ], $tableOptions);

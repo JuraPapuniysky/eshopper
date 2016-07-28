@@ -95,4 +95,9 @@ class Post extends \yii\db\ActiveRecord
         Yii::$app->formatter->locale = 'ru-RU';
         return Yii::$app->formatter->asTime($date[1]);
     }
+
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['post_id' => 'id']);
+    }
 }

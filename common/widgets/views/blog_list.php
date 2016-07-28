@@ -23,7 +23,7 @@ use yii\helpers\Html;
                     <img src="<?= $post->image ?>" alt="">
             </a>
             <p><?= $post->text_preview ?></p>
-        <?= Html::a('Read More', ['/blog/post/', 'id' => $post->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Read More', ['/blog/default/post', 'id' => $post->id], ['class' => 'btn btn-primary']) ?>
 
     </div>
     <?php }?>

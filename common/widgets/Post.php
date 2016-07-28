@@ -17,13 +17,12 @@ class Post extends Widget{
 
     public $post;
 
-    public $comments;
+   
     
     public function run()
     {
         return $this->render('post', [
             'post' => $this->post,
-            'comments' => $this->comments,
         ]);
     }
 }
