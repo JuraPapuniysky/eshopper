@@ -35,6 +35,7 @@ class Comment extends \yii\db\ActiveRecord
         return [
             [['name', 'email', 'text', 'post_id'], 'required'],
             [['text'], 'string'],
+            [['email'], 'email'],
             [['user_id', 'post_id'], 'integer'],
             [['time_stamp'], 'safe'],
             [['name', 'email'], 'string', 'max' => 255],
@@ -64,5 +65,19 @@ class Comment extends \yii\db\ActiveRecord
     public function getPost()
     {
         return $this->hasOne(Post::className(), ['id' => 'post_id']);
+    }
+
+    public function getDate()
+    {
+        Yii::$app->formatter->locale = 'ru-RU';
+        $date = explode(' ', $this->time_stamp);
+        return Yii::$app->formatter->asDate($date[0], 'long');
+    }
+
+    public function getTime()
+    {
+        $date = explode(' ', $this->time_stamp);
+        Yii::$app->formatter->locale = 'ru-RU';
+        return Yii::$app->formatter->asTime($date[1]);
     }
 }

@@ -32,6 +32,15 @@ class DefaultController extends Controller
             if(!\Yii::$app->user->isGuest)
             {
                 $comment->user_id = \Yii::$app->user->id;
+            }else{
+                $comment->user_id = $id;
+            }
+            if($comment->validate())
+            {
+                if($comment->save())
+                {
+                    $this->redirect(['post', 'id' => $id]);
+                }
             }
         }
 
