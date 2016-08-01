@@ -60,25 +60,16 @@ AppAsset::register($this);
                         <a href="index.html"><img src="/images/home/logo.png" alt="" /></a>
                     </div>
                     <div class="btn-group pull-right">
+                        
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                USA
+                                <?= Yii::$app->session->get('currency') ?>
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">UK</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                DOLLAR
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canadian Dollar</a></li>
-                                <li><a href="#">Pound</a></li>
+                                <?php foreach (Yii::$app->exchange_rates->currency as $elem){ ?>
+                                <li><?= Html::a($elem, ['/site/change-carrency', 'currency' => $elem]) ?></li>
+                                <?php } ?>
                             </ul>
                         </div>
                     </div>

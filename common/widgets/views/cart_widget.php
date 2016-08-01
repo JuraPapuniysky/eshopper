@@ -39,7 +39,7 @@ use \yii\helpers\Html;
                             <p><?= $product['product_size'] ?></p>
                         </td>
                         <td class="cart_price">
-                            <p>$<?= $product['product_price'] ?></p>
+                            <p><?= Yii::$app->exchange_rates->icon.' '.money_format('%i', $product['product_price']*Yii::$app->exchange_rates->coef)?></p>
                         </td>
                         <td class="cart_quantity">
                             <div class="cart_quantity_button">
@@ -50,7 +50,7 @@ use \yii\helpers\Html;
                             </div>
                         </td>
                         <td class="cart_total">
-                            <p class="cart_total_price">$ <?= $product['product_total_price'] ?></p>
+                            <p class="cart_total_price"><?= Yii::$app->exchange_rates->icon.' '.money_format('%i', $product['product_total_price']*Yii::$app->exchange_rates->coef)?></p>
                         </td>
                         <td class="cart_delete">
                             <?= Html::a('<i class="fa fa-times"></i>', ['/site/cart/', 'id' => $product['cart_id'], 'action' => 'delete'], ['class' => 'cart_quantity_delete']) ?>
@@ -64,7 +64,7 @@ use \yii\helpers\Html;
                     <td></td>
                     <td></td>
                     <td class="cart_total">
-                        <p class="cart_total_price">$<?=$total_price?></p></td>
+                        <p class="cart_total_price"><?= Yii::$app->exchange_rates->icon.' '.money_format('%i', $total_price*Yii::$app->exchange_rates->coef)?></p></td>
                     <td><?= Html::a('Заказать', ['/site/order-form/'],['class' => 'btn btn-primary']) ?></td>
                 </tr>
                 </tbody>

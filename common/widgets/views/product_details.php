@@ -55,7 +55,7 @@ use yii\widgets\ActiveForm;
                 <p>Web ID: <?= $product['id'] ?></p>
                 <img src="/images/product-details/rating.png" alt="" />
 								<span>
-									<span>$ <?= money_format('%i', $product['price']) ?></span>
+									<span><?= Yii::$app->exchange_rates->icon.' '.money_format('%i', $product['price']*Yii::$app->exchange_rates->coef)?></span>
                                     <?php Pjax::begin() ?>
 
                                     <?php $form = ActiveForm::begin() ?>

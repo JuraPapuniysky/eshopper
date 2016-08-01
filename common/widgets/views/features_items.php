@@ -18,7 +18,7 @@ use yii\helpers\Html;
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <img src="<?= $image[0]->src?>" alt="" />
-                            <h2>$ <?= money_format('%i', $product['price']) ?></h2>
+                            <h2><?= Yii::$app->exchange_rates->icon.' '.money_format('%i', $product['price']*Yii::$app->exchange_rates->coef)?></h2>
                             <p><?= $product['name'] ?></p>
                             <?= Html::a(
                                 '<i class="fa fa-shopping-cart"></i>Product Details',
@@ -28,7 +28,7 @@ use yii\helpers\Html;
                         </div>
                         <div class="product-overlay">
                             <div class="overlay-content">
-                                <h2>$ <?= money_format('%i', $product['price']) ?></h2>
+                                <h2><?= Yii::$app->exchange_rates->icon.' '.money_format('%i', $product['price']*Yii::$app->exchange_rates->coef)?></h2>
                                 <p><?= $product['name'] ?></p>
                                 <?= Html::a(
                                     '<i class="fa fa-shopping-cart"></i>Product Details',

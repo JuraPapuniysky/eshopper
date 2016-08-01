@@ -179,6 +179,18 @@ class SiteController extends Controller
     }
 
     /**
+     * @param $currency
+     */
+    public function actionChangeCarrency($currency)
+    {
+        $session = Yii::$app->session;
+        if($session->has('currency')){
+           $session->set('currency', $currency);
+        }
+        $this->redirect('index');
+    }
+
+    /**
      * Logs in a user.
      *
      * @return mixed
