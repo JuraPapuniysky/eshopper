@@ -72,28 +72,23 @@ class Order extends \yii\db\ActiveRecord
 
     public function add($order_number)
     {
-        $this->order_number = (string)$order_number;
-        $this->status = 0;
-        if($this->validate() && $this->save())
-        {
-            $order = $this->findOne(['order_number' => $order_number]);
-            $products = Cart::findAll(['user_token' => $order_number]);
+        $order = $this->findOne(['order_number' => $order_number]);
+        $products = Cart::findAll(['user_token' => $order_number]);
 
-            foreach ($products as $product)
-            {
-                $order_product = new OrderProduct();
-                $order_product->order_id = $order->id;
-                $order_product->product_id = $product->product_id;
-                $order_product->size_id = $product->size_id;
-                $order_product->count = $product->quantity;
+        foreach ($products as $product) {
+            $order_product = new OrderProduct();
+            $order_product->order_id = $order->id;
+            $order_product->product_id = $product->product_id;
+            $order_product->size_id = $product->size_id;
+            $order_product->count = $product->quantity;
 
-                if($order_product->save())
-                {
-                    unset($order_product);
-                    $product->delete();
-                }
+            if ($order_product->save()) {
+                unset($order_product);
+                $product->delete();
             }
         }
+
     }
+
 }
 

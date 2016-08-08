@@ -131,12 +131,18 @@ class SiteController extends Controller
         $order = new Order();
         
         $order_number = Yii::$app->session->get('user_token');
-       
-        if($order->load(Yii::$app->request->post())){
-            $order->add($order_number);
-            return $this->render('order_success', [
-                'order_number' => $order_number,
-            ]);
+        $order->order_number = (string)$order_number;
+        $order->status = 0;
+        if($order->load(Yii::$app->request->post()) && $order->validate()){
+
+            if($order->save()) {
+                
+                $order->add($order_number);
+
+                return $this->render('order_success', [
+                    'order_number' => $order_number,
+                ]);
+            }
         }else{
             return $this->render('order_form', [
                 'model' => $order,
