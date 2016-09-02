@@ -70,6 +70,12 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasMany(OrderProduct::className(), ['order_id' => 'id']);
     }
 
+    public function getProducts()
+    {
+        return OrderProduct::findAll(['order_id' => $this->id]);
+    }
+
+
     public function add($order_number)
     {
         $order = $this->findOne(['order_number' => $order_number]);

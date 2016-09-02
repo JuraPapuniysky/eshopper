@@ -5,6 +5,8 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Order */
+/* @var $product \backend\models\OrderProduct */
+
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
@@ -39,5 +41,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'order_number',
         ],
     ]) ?>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Продукт</th>
+            <th>Размер</th>
+            <th>Id Заказа</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($products as $product){ ?>
+
+        <tr>
+            <td><?= \backend\models\Product::findOne(['id' => $product->product_id])->name?></td>
+            <td><?= \backend\models\Size::findOne(['id' => $product->size_id])->size?></td>
+            <td><?= $product->order_id?></td>
+            <td><?= $product->count?></td>
+        </tr>
+        <?php }?>
+        </tbody>
+    </table>
+</div>
+
 
 </div>
+

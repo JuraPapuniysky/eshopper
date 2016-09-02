@@ -1,8 +1,12 @@
 <?php
 use yii\helpers\Html;
-
+use backend\models\Order;
 /* @var $this \yii\web\View */
 /* @var $content string */
+
+
+$orders = Order::find()->where(['status' => 0]);
+
 ?>
 
 <header class="main-header">
@@ -104,40 +108,23 @@ use yii\helpers\Html;
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+                        <span class="label label-warning"><?= $orders->count() ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 10 notifications</li>
+                        <li class="header">Необработаных заказов <?= $orders->count() ?></li>
                         <li>
                             <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may
-                                        not fit into the page and may cause design problems
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-users text-red"></i> 5 new members joined
-                                    </a>
-                                </li>
 
+                            <ul class="menu">
+
+                                <?php foreach($orders->all() as $order){ ?>
                                 <li>
-                                    <a href="#">
-                                        <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                    </a>
+                                    <?= Html::a('<i class="fa fa-users text-aqua"></i>'.$order->first_name.' '.$order->order_number.', '.$order->phone, ['order/view', 'id'=> $order->id]) ?>
+
+                                  
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user text-red"></i> You changed your username
-                                    </a>
-                                </li>
+                                <?php }?>
+
                             </ul>
                         </li>
                         <li class="footer"><a href="#">View all</a></li>

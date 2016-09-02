@@ -3,6 +3,8 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\Query;
 
 /**
  * This is the model class for table "order_product".
@@ -18,6 +20,9 @@ use Yii;
  */
 class OrderProduct extends \yii\db\ActiveRecord
 {
+
+ 
+
     /**
      * @inheritdoc
      */
@@ -69,11 +74,36 @@ class OrderProduct extends \yii\db\ActiveRecord
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
+    public function getProductName()
+    {
+        $product = Product::find()->where(['id' => $this->product_id]);
+        return $product->name;
+    }
+
+    public function getProductSize()
+    {
+        $size = Size::find()->where(['id' => $this->size_id])->all();
+        return $size['size'];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getSize()
     {
         return $this->hasOne(Size::className(), ['id' => 'size_id']);
+    }
+    
+    public function getRecommendedProducts()
+    {
+        return (new Query())
+            ->select(['order_product.product_id', 'product.name', 'product.price', 'image.src'])
+            ->distinct(['order_product.product_id'])
+            ->from(['order_product'])
+            ->innerJoin('product', 'product.id = order_product.product_id')
+            ->innerJoin('image', 'image.product_id = order_product.product_id')
+            ->where(['image.description' => 0])
+            ->groupBy(['order_product.product_id', 'product.name', 'product.price', 'image.src'])
+            ->orderBy(['count(order_product.product_id)' => SORT_DESC]);
     }
 }

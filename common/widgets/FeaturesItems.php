@@ -27,6 +27,15 @@ class FeaturesItems extends Widget
     public $brand_id;
 
 
+    /**
+     * 
+     */
+    public function init()
+    {
+        $this->setData($this->category_id, $this->section_id, $this->brand_id);
+        $this->pagination();
+    }
+
     public function setData($category_id, $section_id, $brand_id)
     {
 
@@ -61,8 +70,7 @@ class FeaturesItems extends Widget
 
     public function run()
     {
-        $this->setData($this->category_id, $this->section_id, $this->brand_id);
-        $this->pagination();
+
         return $this->render('features_items',[
             'products' => array_reverse($this->model),
             'pages' => $this->pages,
