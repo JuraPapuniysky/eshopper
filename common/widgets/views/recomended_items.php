@@ -36,7 +36,4 @@
             <i class="fa fa-angle-right"></i>
         </a>
     </div>
-        <pre>
-            <?php print_r($model); ?>
-        </pre>
 </div><!--/recommended_items-->
