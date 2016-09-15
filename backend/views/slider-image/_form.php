@@ -12,9 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'src')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'src')->textInput() ?>
 
     <?= $form->field($model, 'type')->textInput() ?>
+
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <?= $form->field($model, 'slider_id')->textInput() ?>
 

@@ -4,50 +4,32 @@
             <div class="col-sm-12">
                 <div id="slider-carousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#slider-carousel" data-slide-to="1"></li>
-                        <li data-target="#slider-carousel" data-slide-to="2"></li>
+                        <?php $i = 0; foreach ($model as $item){?>
+                        <li data-target="#slider-carousel" data-slide-to="<?= $i ?>" <?php if($i == 0){echo 'class="active"';}?> ></li>
+                        <?php $i++; } ?>
                     </ol>
 
                     <div class="carousel-inner">
+                        <?php $i = 0; foreach ($model as $item) {
+                        $title = $item->getTitle();
+                        ?>
+                        <?php if($i == 0){?>
                         <div class="item active">
+                            <?php }else{ ?>
+                            <div class="item">
+                            <?php }?>
                             <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free E-Commerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <h1><span><?= $title[0] ?></span>-<?= $title[1] ?></h1>
+                                <h2><?= $item->subtitle ?></h2>
+                                <p><?= $item->text ?></p>
                                 <button type="button" class="btn btn-default get">Get it now</button>
                             </div>
                             <div class="col-sm-6">
-                                <img src="/images/home/girl1.jpg" class="girl img-responsive" alt="" />
-                                <img src="/images/home/pricing.png"  class="pricing" alt="" />
+                                <img src="<?= $item->getSliderImage()->src ?>" class="girl img-responsive" alt="" />
+                                <img src="<?= $item->getSliderPricing()->src ?>"  class="pricing" alt="" />
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>100% Responsive Design</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="/images/home/girl2.jpg" class="girl img-responsive" alt="" />
-                                <img src="/images/home/pricing.png"  class="pricing" alt="" />
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>E</span>-SHOPPER</h1>
-                                <h2>Free Ecommerce Template</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                <button type="button" class="btn btn-default get">Get it now</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="/images/home/girl3.jpg" class="girl img-responsive" alt="" />
-                                <img src="/images/home/pricing.png" class="pricing" alt="" />
-                            </div>
-                        </div>
-
+                        <?php $i++; }?>
                     </div>
 
                     <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">

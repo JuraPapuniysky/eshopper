@@ -18,6 +18,12 @@ use Yii;
  */
 class Slider extends \yii\db\ActiveRecord
 {
+
+    const TYPE_SLIDER_IMAGE = 0;
+    const TYPE_SLIDER_PRICING = 1;
+
+
+
     /**
      * @inheritdoc
      */
@@ -57,11 +63,34 @@ class Slider extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getSliderImages()
     {
         return $this->hasMany(SliderImage::className(), ['slider_id' => 'id']);
+    }
+
+    /**
+     * @return source of slider image
+     */
+    public function getSliderImage()
+    {
+        return SliderImage::findOne(['slider_id' => $this->id, 'type' => self::TYPE_SLIDER_IMAGE]);
+    }
+
+    /**
+     * @return source of pricing image
+     */
+    public function getSliderPricing()
+    {
+        return SliderImage::findOne(['slider_id' => $this->id, 'type' => self::TYPE_SLIDER_PRICING]);
+    }
+
+    public function getTitle()
+    {
+        list($title[0], $title[1]) = explode('-', $this->header);
+        return $title;
     }
 }

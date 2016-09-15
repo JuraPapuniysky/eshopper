@@ -17,6 +17,10 @@ use Yii;
  */
 class SliderImage extends \yii\db\ActiveRecord
 {
+
+    const PATH_TO_IMAGES = '../../frontend/web';
+
+    public $imageFile;
     /**
      * @inheritdoc
      */
@@ -31,7 +35,7 @@ class SliderImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['src', 'type', 'slider_id'], 'required'],
+            [['type', 'slider_id'], 'required'],
             [['type', 'slider_id'], 'integer'],
             [['created_at'], 'safe'],
             [['src'], 'string', 'max' => 255],
@@ -50,6 +54,7 @@ class SliderImage extends \yii\db\ActiveRecord
             'src' => 'Src',
             'type' => 'Type',
             'slider_id' => 'Slider ID',
+            'imageFile' => 'ImageFile',
             'created_at' => 'Created At',
         ];
     }
@@ -60,5 +65,18 @@ class SliderImage extends \yii\db\ActiveRecord
     public function getSlider()
     {
         return $this->hasOne(Slider::className(), ['id' => 'slider_id']);
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $image = '/images/slider-images/' . $this->imageFile->baseName . '.' . $this->imageFile->extension;
+            $path = self::PATH_TO_IMAGES.$image;
+            $this->imageFile->saveAs($path);
+            $this->src = str_replace(self::PATH_TO_IMAGES, '', $path);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

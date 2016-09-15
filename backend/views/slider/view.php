@@ -37,4 +37,25 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+
+
+    <?= Html::a('Добавить картинку',
+        [
+            'slider-image/create',
+            'sliderId' => $model->id,
+            'type' => 0
+        ],
+        [
+            'class' => 'btn btn-primary'
+        ])?>
+    <?= Html::a('Добавить прайсин',
+        [
+            'slider-image/create',
+            'sliderId' => $model->id,
+            'type' => 1
+        ],
+        [
+            'class' => 'btn btn-primary'
+        ])?>
+
 </div>

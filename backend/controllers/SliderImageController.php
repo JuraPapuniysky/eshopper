@@ -8,6 +8,7 @@ use common\models\SliderImageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SliderImageController implements the CRUD actions for SliderImage model.
@@ -61,13 +62,22 @@ class SliderImageController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($sliderId, $type)
     {
         $model = new SliderImage();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        $model->slider_id = $sliderId;
+        $model->type = $type;
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+        }else{
             return $this->render('create', [
                 'model' => $model,
             ]);

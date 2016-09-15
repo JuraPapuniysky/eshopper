@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'slide_name',
             'header',
             'subtitle',
-            'text',
+            // 'text',
             // 'created_at',
 
             ['class' => 'yii\grid\ActionColumn'],
