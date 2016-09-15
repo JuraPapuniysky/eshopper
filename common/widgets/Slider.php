@@ -11,7 +11,7 @@ class Slider extends Widget
     public function init()
     {
       $model = new \common\models\Slider();
-      $this->model = $model->find()->all();
+      $this->model = $model->find()->where(['status' => \common\models\Slider::STATUS_ACTIVE])->all();
     }
 
     public function run()

@@ -28,6 +28,6 @@ $this->title = 'Home';
 
     <?= FeaturesItems::widget(['category_id' => $category_id,'section_id' => $section_id, 'brand_id' => $brand_id])?>
 
-    <?= RecomendedItems::widget() ?>
+    <?php //echo RecomendedItems::widget() ;?>
 
 </div>

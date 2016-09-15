@@ -13,6 +13,7 @@ use Yii;
  * @property string $subtitle
  * @property string $text
  * @property string $created_at
+ * @property integer $status
  *
  * @property SliderImage[] $sliderImages
  */
@@ -21,6 +22,7 @@ class Slider extends \yii\db\ActiveRecord
 
     const TYPE_SLIDER_IMAGE = 0;
     const TYPE_SLIDER_PRICING = 1;
+    const STATUS_ACTIVE = 1;
 
 
 
@@ -38,9 +40,10 @@ class Slider extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['slide_name', 'header', 'subtitle', 'text'], 'required'],
+            [['slide_name', 'header', 'subtitle', 'text', 'status'], 'required'],
             [['created_at'], 'safe'],
             [['slide_name', 'header', 'subtitle', 'text'], 'string', 'max' => 255],
+            [['status'], 'integer'],
             [['slide_name'], 'unique'],
             [['header'], 'unique'],
             [['subtitle'], 'unique'],
@@ -77,7 +80,12 @@ class Slider extends \yii\db\ActiveRecord
      */
     public function getSliderImage()
     {
-        return SliderImage::findOne(['slider_id' => $this->id, 'type' => self::TYPE_SLIDER_IMAGE]);
+        return SliderImage::findOne(
+            [
+                'slider_id' => $this->id,
+                'type' => self::TYPE_SLIDER_IMAGE,
+
+            ]);
     }
 
     /**
@@ -85,7 +93,12 @@ class Slider extends \yii\db\ActiveRecord
      */
     public function getSliderPricing()
     {
-        return SliderImage::findOne(['slider_id' => $this->id, 'type' => self::TYPE_SLIDER_PRICING]);
+        return SliderImage::findOne(
+            [
+                'slider_id' => $this->id,
+                'type' => self::TYPE_SLIDER_PRICING,
+
+            ]);
     }
 
     public function getTitle()

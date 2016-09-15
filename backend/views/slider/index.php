@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'slide_name',
             'header',
             'subtitle',
+            'status',
             // 'text',
             // 'created_at',
 

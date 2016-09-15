@@ -18,7 +18,7 @@ class SliderSearch extends Slider
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'status',], 'integer'],
             [['slide_name', 'header', 'subtitle', 'text', 'created_at'], 'safe'],
         ];
     }
@@ -66,7 +66,8 @@ class SliderSearch extends Slider
         $query->andFilterWhere(['like', 'slide_name', $this->slide_name])
             ->andFilterWhere(['like', 'header', $this->header])
             ->andFilterWhere(['like', 'subtitle', $this->subtitle])
-            ->andFilterWhere(['like', 'text', $this->text]);
+            ->andFilterWhere(['like', 'text', $this->text])
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }
