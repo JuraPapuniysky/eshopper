@@ -21,8 +21,6 @@ use yii\db\Query;
 class OrderProduct extends \yii\db\ActiveRecord
 {
 
- 
-
     /**
      * @inheritdoc
      */
