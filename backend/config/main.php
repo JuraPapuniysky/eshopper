@@ -29,6 +29,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@backend/views/yii2-app'
+                ],
+            ],
+        ],
+
+
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

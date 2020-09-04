@@ -28,14 +28,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+    ],
+    'modules' => [
+        'blog' => [
+            'class' => 'frontend\modules\blog\Blog',
+        ],
     ],
     'params' => $params,
 ];
